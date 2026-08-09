@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Leaflet</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="leaflet/leaflet.css">
+	<script type="text/javascript" src="leaflet/leaflet.js"></script>
+	<script type="text/javascript" src="geojson.js"></script>
+
+	<script src="Leaflet.Polyline.SnakeAnim-master/L.Polyline.SnakeAnim.js"></script>
+	<script>
+		const path = [
+            [
+                34.027766, -6.839783
+            ],
+            [
+                34.029989, -6.836693
+            ],
+            [
+                34.029349, -6.835277
+            ],
+            [
+                34.029207, -6.834505
+            ],
+            [
+                34.028104, -6.832573
+            ],
+
+            [
+                34.027037, -6.828947
+            ],
+            [
+                34.026753, -6.826243
+            ],
+            [
+                34.026148, -6.825278
+            ],
+
+            [
+                34.022929, -6.824913
+            ],
+            [
+                34.023285, -6.823754
+            ]
+        ];
+	</script>
+
+	<style type="text/css">
+		#mapContainer{
+			width: 100%;
+			height: 700px;
+		}
+	</style>
+</head>
+<body>
+<div id="mapContainer">
+</div>
+<div id="logoContainer">
+    <img src="images/logo.png" />
+</div>
+<script type="text/javascript">
+/*
+    leaflet -> latitude and longitude
+    geojson -> longitude and latitude
+*/
+
+var map = L.map('mapContainer', {
+    center: [34.028478, -6.839225],
+    zoom: 17
+});
+
+
+var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
+    {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }
+).addTo(map);
+
+
+let hotels = L.layerGroup();
+let visits = L.layerGroup();
+let parks = L.layerGroup();
+
+
+function process(feature, layer){
+	let popupText = `
+		<b>
+			${feature.properties.Type}
+			<br />
+			${feature.properties.Name}
+		</b>
+	`;
+
+	if(feature.properties.Type == "Visit"){
+		popupText += `
+			<br />
+			<button id='poi${feature.properties.Id}'>
+				Visited
+			</button>
+		`;
+	}
+
+	let popupObject = layer.bindPopup(popupText, {
+		className: "mapPopup",
+		offset: L.point(0, -16)
+	});
+
+	if(feature.properties.Type == "Hotel"){
+		layer.setIcon(L.icon({
+			iconUrl: 'images/hotel.png',
+			iconSize: [32, 32],
+			iconAnchor: [16, 32]
+		}));
+		
+		hotels.addLayer(layer);
+	}
+	else if(feature.properties.Type == "Visit"){
+		layer.setIcon(L.icon({
+			iconUrl: 'images/visit.png',
+			iconSize: [32, 32],
+			iconAnchor: [16, 32]
+		}));
+
+		popupObject.on('popupopen', () => {
+			document.getElementById(`poi${feature.properties.Id}`).addEventListener("click", (e) => {
+				if(feature.properties.Type == "Visit"){
+					layer.setIcon(L.icon({
+						iconUrl: 'images/green_visit.png',
+						iconSize: [32, 32],
+						iconAnchor: [16, 32]
+					}));
+				}
+			});
+		});
+
+		visits.addLayer(layer);
+	}
+	else if(feature.properties.Type == "Park"){
+		layer.setStyle({
+			"color": feature.properties.stroke,
+			"weight": feature.properties["stroke-width"],
+			"opacity": feature.properties["stroke-opacity"],
+			"fillColor": feature.properties.fill,
+			"fillOpacity": feature.properties["fill-opacity"]
+		});
+
+		parks.addLayer(layer);
+	}
+}
+let geoJson = L.geoJson(POI, {
+	onEachFeature: process
+});
+
+
+hotels.addTo(map);
+visits.addTo(map);
+parks.addTo(map);
+
+var overlays = {
+	'Hotels': hotels,
+	'Visits': visits,
+	'Parks': parks
+};
+
+var layerControl = L.control.layers(null, overlays).addTo(map);
+
+
+let latlngs = [];
+for(let pathItem of path){
+	let latitude = pathItem[0];
+	let longitude = pathItem[1];
+    latlngs.push(new L.LatLng(latitude, longitude));
+}
+
+var line = L.polyline(latlngs,{snakingSpeed:50});
+line.addTo(map).snakeIn();
+</script>
+</body>
+</html>

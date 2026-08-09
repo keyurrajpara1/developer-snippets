@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	// Basic Example 1
+	/*const promiseObj1 = new Promise((resolve, reject)=>{
+		let req = true;
+		if(req == true){
+			resolve("Request Success");
+		}
+		else{
+			reject("Request Rejected");
+		}
+	});
+	promiseObj1.then(
+		(value) => {
+			console.log(value)
+		},
+		(error) => {
+			console.log(error)
+		},
+	);*/
+
+	// Basic Example 2
+	/*const promiseObj1 = new Promise((resolve, reject)=>{
+		let req = true;
+		if(req == true){
+			resolve("Request Success");
+		}
+		else{
+			reject("Request Rejected");
+		}
+	}).then(
+		(value) => {
+			console.log(value)
+		},
+		(error) => {
+			console.log(error)
+		},
+	);*/
+
+	// Promise Catch
+	const promiseObj1 = new Promise((resolve, reject)=>{
+		let req = true;
+		if(req == true){
+			resolve("Request Success");
+		}
+		else{
+			reject("Request Rejected");
+		}
+	}).then(
+		(value) => {
+			console.log(value)
+		},
+		// (error) => {
+		// 	console.log(error)
+		// },
+	).catch(
+		(error) => {
+			console.log(error);
+		}
+	);
+</script>
+</body>
+</html>

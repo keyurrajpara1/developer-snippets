@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div x-data="todoApp" class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">To-Do List</h1>
+
+    <!-- Input for new task -->
+    <div class="flex items-center gap-2 mb-4">
+      <input x-model="newTask" type="text" placeholder="Add a new task..."
+        class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+
+      <button @click="addTask" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+        Add
+      </button>
+    </div>
+
+    <!-- Task List -->
+    <ul class="space-y-3">
+
+      <template x-for="(task, index) in tasks" :key="index">
+        <li class="flex justify-between items-center p-3 bg-gray-100 rounded-lg">
+          <span x-text="task.text" :class="task.completed ? 'line-through text-gray-500' : ''"></span>
+          <div class="flex items-center gap-2">
+            <button @click="toggleTask(index)" class="text-green-500 hover:text-green-600">
+              ✓
+            </button>
+            <button @click="removeTask(index)" class="text-red-500 hover:text-red-600">
+              ✕
+            </button>
+          </div>
+        </li>
+      </template>
+
+    </ul>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('todoApp', () => ({
+        newTask: '',
+        tasks: [],
+        addTask() {
+          if (this.newTask.trim() !== '') {
+            this.tasks.push({ text: this.newTask, completed: false })
+            this.newTask = '';
+          }
+        },
+        toggleTask(index) {
+          this.tasks[index].completed = !this.tasks[index].completed;
+        },
+        removeTask(index) {
+          this.tasks.splice(index, 1)
+        }
+
+      }));
+    });
+
+  </script>
+
+</body>
+
+</html>

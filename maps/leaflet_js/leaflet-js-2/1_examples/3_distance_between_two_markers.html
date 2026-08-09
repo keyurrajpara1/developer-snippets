@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Leaflet</title>
+	<link rel="stylesheet" type="text/css" href="leaflet/leaflet.css">
+	<script type="text/javascript" src="leaflet/leaflet.js"></script>
+	<style type="text/css">
+		#mapContainer{
+			width: 100%;
+			height: 700px;
+		}
+	</style>
+</head>
+<body>
+<div id="mapContainer">
+</div>
+<script type="text/javascript">
+const haversineDistance = (pos1, pos2) => {
+    const R = 6378137;
+    const d2r = Math.PI / 180;
+    
+    const dLat = (pos2.lat - pos1.lat) * d2r;
+    const dLng = (pos2.lng - pos1.lng) * d2r;
+    const lat1 = pos1.lat * d2r;
+    const lat2 = pos2.lat * d2r;
+    
+    const sin1 = Math.sin(dLat / 2);
+    const sin2 = Math.sin(dLng / 2);
+
+    const a = sin1 * sin1 + sin2 * sin2 * Math.cos(lat1) * Math.cos(lat2); 
+    return R * 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1 - a));
+}
+
+var map = L.map('mapContainer', {
+    center: [51.505, -0.09],
+    zoom: 13
+});
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([51.501, -0.093], {
+	title: 'My Position',
+	draggable: true
+}).addTo(map);
+
+
+var myIcon1 = L.icon({
+	iconUrl: 'images/green_flag.png',
+	iconSize: [51, 51],
+	iconAnchor: [5, 51]
+});
+var startPoint = L.marker([51.53, -0.08], {
+	icon: myIcon1
+}).addTo(map);
+
+
+var myIcon2 = L.icon({
+	iconUrl: 'images/red_flag.png',
+	iconSize: [51, 51],
+	iconAnchor: [5, 51]
+});
+var endPoint = L.marker([51.48, -0.11], {
+	icon: myIcon2
+}).addTo(map);
+
+
+var startCoords = startPoint.getLatLng();
+var endCoords = endPoint.getLatLng();
+var distance = startCoords.distanceTo(endCoords);
+
+alert(`Distance is: ${distance}m`);
+alert(`Distance is: ${Math.round(distance/1000)}km`);
+
+var distanceHaversine = haversineDistance(endCoords, startCoords);
+alert(`Distance using haversine is: ${Math.round(distanceHaversine/1000)}km`);
+</script>
+</body>
+</html>

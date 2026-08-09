@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Image Zoom</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Set up the zoom container */
+    .zoom-container {
+      position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+
+    .zoom-image {
+      transition: transform 0.3s ease-in-out;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Hover zoom effect */
+    .zoom-container:hover .zoom-image {
+      transform: scale(1.2);
+    }
+
+    /* Zoom Text (Visible only on hover) */
+    .zoom-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .zoom-container:hover .zoom-text {
+      opacity: 1;
+    }
+
+    /* Full-screen zoom effect (50% of screen size) */
+    .zoom-container.full-screen .zoom-image {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.5);
+      /* Zoom by 1.5x */
+      width: auto;
+      height: auto;
+      max-width: 60%;
+      /* Control zoom size */
+      max-height: 60%;
+      /* Control zoom size */
+      z-index: 9999;
+      cursor: zoom-out;
+    }
+
+    /* Full-screen background overlay */
+    .full-screen-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 9998;
+      display: none;
+    }
+
+    .zoom-container.full-screen .full-screen-overlay {
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen p-6">
+
+  <!-- Product Display with Zoom -->
+  <div x-data="imageZoom" class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-6">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Product Image Zoom</h2>
+
+    <!-- Product Image with Zoom -->
+    <div :class="{'zoom-container': true, 'full-screen': isZoomedIn}" class="relative group">
+      <!-- Image -->
+      <img :src="image" alt="Product Image" class="zoom-image w-full h-64 rounded-lg" @click="toggleZoom" />
+
+      <!-- Hover Text -->
+      <div class="zoom-text">Click to Zoom</div>
+
+      <!-- Full-screen overlay background -->
+      <div class="full-screen-overlay" @click="toggleZoom"></div>
+
+      <!-- Product Details -->
+      <div class="mt-6 text-center">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Awesome Product</h3>
+        <p class="text-lg text-gray-600">$29.99</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('imageZoom', () => ({
+        image: 'images/img1.jpg',
+        isZoomedIn: false,
+        toggleZoom() {
+          this.isZoomedIn = !this.isZoomedIn;
+        }
+      }));
+    });
+  </script>
+
+</body>
+
+</html>

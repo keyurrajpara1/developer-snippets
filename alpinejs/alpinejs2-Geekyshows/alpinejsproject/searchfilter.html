@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Filter</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div x-data="searchFilter" class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Search Filter</h1>
+
+    <!-- Search Input -->
+    <div class="mb-4">
+      <input type="text" placeholder="Search..." x-model="query"
+        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+    </div>
+
+    <!-- List of Items -->
+    <ul>
+      <template x-for="item in filteredItems" :key="item">
+        <li class="bg-gray-100 p-3 rounded-lg mb-2 text-gray-800" x-text="item"></li>
+      </template>
+    </ul>
+
+    <!-- No Results -->
+    <p x-show="filteredItems.length === 0" class="text-gray-500 text-center mt-4">No items found.</p>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('searchFilter', () => ({
+        query: '',
+        items: [
+          'Apple',
+          'Banana',
+          'Orange',
+          'Grapes',
+          'Watermelon',
+          'Pineapple',
+          'Mango',
+          'Strawberry'
+        ],
+
+        get filteredItems() {
+          return this.items.filter(item =>
+            item.toLowerCase().includes(this.query.toLowerCase())
+          );
+        }
+
+      }));
+    });
+  </script>
+
+</body>
+
+</html>

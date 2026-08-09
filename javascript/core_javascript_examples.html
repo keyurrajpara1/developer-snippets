@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript">
+		// console.log("Inline inside head tag");
+
+		// --------------------------------------------------
+		
+		// document.write("Hello World <br />");
+		// document.write(4+5 + "<br />");
+		// var jsVariable = "Variable content <br />";
+		// document.write(jsVariable);
+
+		// --------------------------------------------------
+
+		// window.alert(4+2);
+		// window.alert("Hello World <br />");
+
+		// --------------------------------------------------
+
+		// Primitive Data Type: String, Number, Boolean, Undefined, Null
+		// Non-Primitive Data Type: Object, Array, RegExp
+
+		/*var roll; // Declaring Variable - undefined
+		document.write(roll + "<br />");
+		roll = 101; // Initializing Variable
+		document.write(roll + "<br />");
+		var name; // Declaring Variable - undefined
+		name = "Keyur Rajpara"; // Initializing Variable
+		var roll = 101; // Declaring + Initializing Both In One Line
+		var ans = true; // boolean
+		var x = 10, y = 20, z = 30;
+		var fname = "Keyur", lname = "Rajpara";
+		var fname = "Keyur", roll = 44;*/
+
+		// --------------------------------------------------
+
+		// Single Line Comment
+		/*
+			Multi line comment
+		*/
+
+		// --------------------------------------------------
+
+		
+		// JavaScript Operators
+		// - Arithmetic Operators
+		// +   -   *   /   %   ++   --
+
+		// - Comparison (Relational) Operators
+		// <   >   <=   >=   ==   !=   ===   !==
+
+		// - Logical Operators
+		// &&   ||   !
+
+		// - Bitwise Operators
+		// <<   >>   ~   &   |   ^
+
+		// - Assignment Operators
+		// =   +=   -=   *=   /=   %=   <<=   >>=   >>>=   &=   ^=   |=
+
+		// --------------------------------------------------
+
+		// var a = prompt("Enter Value: ");
+		// document.write(a);
+
+		// --------------------------------------------------
+
+		/*if(1){
+		}
+		if(1){
+		}
+		else{
+		}
+		if(1){
+		}
+		else if(1){
+		}
+		else{
+		}
+		var day = 1;
+		switch(day){
+			case 1:
+				document.write("Sunday");
+				break;
+			case 2:
+				document.write("Monday");
+				break;
+			case 3:
+			case 4:
+				document.write("Tuesday");
+				break;
+			default:
+				document.write("Wrong");
+				break;
+		}*/
+
+		// --------------------------------------------------
+
+		/*for (var i = 0; i < 5; i++) {
+			document.write(i + "<br />");
+		}*/
+
+		/*var i = 0;
+		for (;;) {
+			if(i < 5){
+				document.write(i + "<br />");
+				i++;
+			}
+			else{
+				break;
+			}
+		}*/
+
+		/*for(i=0; i<3; i++){
+			document.write("<strong>Outer Loop </strong>" + i + "<br>");
+			for(j=0; j<5; j++){
+				document.write("Inner Loop " + j + "<br>");
+			}
+		}*/
+
+		/*var i = 0;
+		while(i<5){
+			document.write(i + "<br>");
+			i++;
+		}*/
+
+		/*var i = 0;
+		while(true){
+			if(i==3){
+				break;
+			}
+			document.write(i + "<br>");
+			i++;
+		}*/
+
+		/*var i = 0;
+		while(i<3)
+		{
+			document.write("<strong>Outer Loop </strong>" + i + "<br>");
+			i++;
+			var j = 0;
+			while(j<5)
+			{
+				document.write("Inner Loop " + j + "<br>");
+				j++;
+			}
+		}*/
+
+		/*var i = 0;
+		do{
+			document.write(i + "<br>");
+			i++;
+		}while(i<5);*/
+
+		/*var i = 0;
+		do{
+			if(i==3){
+				break;
+			}
+			document.write(i + "<br>");
+			i++;
+		}while(true);*/
+
+		/*var i = 0;
+		do{
+			document.write("<strong>Outer Loop </strong>" + i + "<br>");
+			i++;
+			var j = 0;
+			do{
+				document.write("Inner Loop " + j + "<br>");
+				j++;
+			}while(j<5);
+		}while(i<3);*/
+
+		// --------------------------------------------------
+
+		/*for(i=1; i<=10; i++){
+			if(i==8){
+				break; // stop loop
+			}
+			document.write(i + "<br>");
+		}*/
+
+		// --------------------------------------------------
+
+		/*for(i=1; i<=10; i++){
+			if(i==8){
+				continue;	// skip loop
+			}
+			document.write(i + "<br>");
+		}*/
+
+		// --------------------------------------------------
+
+		/*Type of function
+		[1] Library or Built-in functions
+			Ex: valueOf(), write(), alert() etc...
+		[2] User-defined functions*/
+
+		// FUNCTION
+		/*function display(){ // Creating a function
+			document.write("Body of display function");
+		}
+		display(); // Calling a function
+		*/
+
+		// FUNCTION WITH PARAMETER
+		/*function display(name) {
+			document.write(name);
+		}
+		display("Keyur Rajpara", 1);
+		*/
+
+		// FUNCTION ARGUMENT MISSING
+		/*function add(a, b, c) {
+			document.write("A: " + a + " B: " + b + " C: " + c);
+		}
+		add(10, 20);*/
+		
+		// ARGUMENTS OBJECT IN FUNCTION
+		/*function disp(name1, name2){
+			arguments[0] = "Hello";
+			document.write(name1 + "<br>");
+			document.write(arguments[0] + "<br><br>");
+			document.write(name2 + "<br>");
+			document.write(arguments[1] + "<br><br>");
+			document.write(arguments.length); // Number of passed arguments from calling a function
+		}
+		disp("Keyur", "World");*/
+
+		/*function disp(){
+			for (var i = 0; i < arguments.length; i++) {
+				document.write(arguments[i] + " ");
+			}
+			document.write("<br>");
+			document.write(arguments.callee); // returns function code
+		}
+		disp("Keyur", "Hello", "World");*/
+
+		// TOO MANY FUNCTION ARGUMENTS
+		/*function add(a, b) {
+			document.write("A: " + a + " B: " + b + " C: " + arguments[2]);
+		}
+		add(10, 20, 30);*/
+
+		// DEFAULT PARAMETER
+		// Need to write null in small letters
+		/*function add(a, b, c=70, d=null) {
+			document.write("A: " + a + "<br>");
+			document.write("B: " + b + "<br>");
+			document.write("C: " + c + "<br>");
+			document.write("D: " + d + "<br>");
+		}
+		add(10, 20, 30);
+		add(10, 20);*/
+
+		/*function add(name, arr=[101, 102]){
+			document.write("Name: " + name + "<br>");
+			document.write("Arr[0]: " + arr[0] + "<br>");
+			document.write("Arr[1]: " + arr[1] + "<br>");
+		}
+		add("Hello", [10,20]);*/
+
+		// REST PARAMETER
+		/*function show(a, ...restOfArguments) {
+			document.write("A: " + a + "<br>");
+			document.write("restOfArguments: " + restOfArguments + "<br>");
+			document.write("restOfArguments[0]: " + restOfArguments[0] + "<br>");
+			document.write("restOfArguments[1]: " + restOfArguments[1] + "<br>");
+			document.write("restOfArguments[2]: " + restOfArguments[2] + "<br>");
+			document.write("restOfArguments[3]: " + restOfArguments[3] + "<br>");
+		}
+		show(10, 20, 30, 40, 50);*/
+
+		// RETURN STATEMENT
+		/*function add(a, b) {
+			return (a+b);
+		}
+		document.write(add(10, 20) + "<br>");
+		document.write(add(30, 40) + "<br>");*/
+
+		// VARIABLE SCOPE
+		// GLOBAL SCOPE
+		/*var i = "I am global variable"; // scope is global
+		function show() {
+			document.write(i + "<br>");
+		}
+		show();
+		document.write(i + "<br>"); // outside
+		function disp() { // Inside function
+			document.write(i + "<br>");
+		}
+		disp();
+		if(1){ // Inside block
+			document.write(i + "<br>");
+		}*/
+
+		// LOCAL SCOPE
+		/*function show(){
+			var j = "I am local variable"; // scope is only function
+			document.write(j + "<br>");
+		}
+		show();
+		document.write(j + "<br>"); // can't access*/
+
+		// GLOBAL SCOPE
+		/*function show(){
+			j = "I am global variable inside function"; // scope is global
+			document.write(j + "<br>");
+		}
+		show();
+		document.write(j + "<br>");*/
+
+		/*function show(){
+			var j = "J a Local variable of Outer Function";
+			document.write(j + "<br>");
+			function innerFun(){
+				var k = "K a Local variable of Inner Function";
+				document.write(k + "<br>");
+				document.write(j + "<br>");
+			}
+			innerFun();
+			document.write(k + "<br>"); // can't access
+		}
+		show();*/
+
+		// BLOCK SCOPE - Ex: if statement block
+		/*if(1){
+			var i = 10; // scope is global
+			document.write(i + "<br>");
+		}
+		document.write(i + "<br>");*/
+
+		/*if(1){
+			let i = 10; // scope is block
+			document.write(i + "<br>");
+		}
+		document.write(i + "<br>");*/
+
+		// VARIABLE HOISTING
+		/*var a = 10;
+		document.write(a);
+
+		// JS Execution
+		// var a;
+		// a = 10;
+		// document.write(a);*/
+
+		/*var a = 10;
+		document.write(a + " " + b + "<br>");
+		var b = 20;
+		document.write(a + " " + b);
+
+		// JS Execution
+		// var a;
+		// var b;
+		// a = 10;
+		// document.write(a + " " + b + "<br>");
+		// b = 20;
+		// document.write(a + " " + b);*/
+
+		/*a = 10;
+		document.write(a);
+		var a;
+
+		// JS Execution
+		// var a;
+		// a = 10;
+		// document.write(a);*/
+
+		/*var i = "Hello";
+		document.write(i + "<br>");
+		function show(){
+			document.write(i + "<br>");
+			var i = "Keyur";
+			document.write(i + "<br>");
+		}
+		show();
+
+		// JS Execution
+		// var i;
+		// i = "Hello";
+		// document.write(i + "<br>");
+		// function show(){
+		// 	var i;
+		// 	document.write(i + "<br>");
+		// 	i = "Keyur";
+		// 	document.write(i + "<br>");
+		// }*/
+
+		// CLOSURE
+		/*var i = 10;
+		function show(){
+			var j = 20;
+			document.write(j + "<br>");
+			document.write(i + "<br>");
+		}
+		show();*/
+
+		/*function show(){
+			var j = "J a local variable of outer function";
+			document.write(j + "<br>");
+			function innerFun(){
+				var k = "K a local variable of inner function";
+				document.write(k + "<br>");
+				document.write(j + "<br>");
+			}
+			innerFun();
+			document.write(k + "<br>");
+		}
+		show();*/
+
+		// FUNCTION EXPRESSION
+		/*
+		// function declaration
+		show();
+		function show(){
+			document.write("Keyur Rajpara <br>");
+		}
+		show(); */
+
+		/*
+		// function expression
+		// disp(); // can't access
+		var disp = function show(){
+			document.write("Keyur <br>");
+		}
+		disp(); */
+
+		// ANONYMOUS FUNCTION
+		/*var disp = function(){
+			document.write("Keyur <br>");
+		}
+		disp();*/
+
+		// PASSING ANONYMOUS FUNCTION AS ARGUMENT
+		/*function disp(myfun){
+			return myfun();
+		}
+		document.write(disp( function(){
+			return "Keyur";
+		} ));*/
+
+		// RETURNING ANONYMOUS FUNCTION
+		/*function disp(a){
+			return function(b){
+				return a+b;
+			};
+		}
+		var af = (disp(10));
+		document.write(af(20));*/
+
+		// ARROW FUNCTION
+		/*// Function declaration
+		function show(){
+			document.write("Function declaration <br>");
+		}
+		show();*/
+
+		/*// Function expression
+		myfun1(); // can't access
+		var myfun1 = function show(){
+			document.write("Function expression <br>");
+		};
+		myfun1();*/
+
+		/*// Anonymous function
+		myfun2(); // can't access
+		var myfun2 = function(){
+			document.write("Anonymous function <br>");
+		};
+		myfun2();*/
+
+		/*// Arrow function
+		// myfun(); // can't access
+		var myfun = () => {
+			document.write("Arrow function <br>");
+		}
+		myfun();*/
+
+		// IMMEDIATELY INVOKED FUNCTION EXPRESSION
+		/*(function (b){
+			var a = 10;
+			document.write(a + " " + b);
+		})(20);*/
+
+		// TYPEOF OPERATOR
+		/*var a = 13;
+		document.write(typeof(a) + "<br>");
+		document.write(typeof("Hello") + "<br>");*/
+
+		// UNDEFINED
+		/*var a;
+		// Value not assigned Undefined
+		document.write(a + "<br>");
+
+		// b doesn't exist Undefined
+		document.write(typeof(b) + "<br>");
+
+		// Undefined error
+		document.write(b + "<br>");*/
+
+		// NULL
+		/*var a = null;
+		document.write(a + "<br>");
+		document.write(typeof(a) + "<br>");*/
+
+		// VAR, LET AND CONST
+		/*function myvar(){
+			var a = 10;
+			if(true){
+				var a = 20;
+				document.write(a + "<br>");
+			}
+			document.write(a + "<br>");
+		}
+		myvar();*/
+
+		/*function mylet(){
+			let a = 70;
+			if(true){
+				let a = 90;
+				document.write(a + "<br>");
+			}
+			document.write(a + "<br>");
+		}
+		mylet();*/
+
+		/*for (var i = 0; i < 5; i++) {
+			document.write(i + "<br>");
+		}
+		document.write(i + "<br>");*/
+
+		/*for (let i = 0; i < 5; i++) {
+			document.write(i + "<br>");
+		}
+		document.write(i + "<br>"); // can't access*/
+
+		// OBJECT LITERAL
+		/*// Declaration of object
+		var fees = {};
+
+		// Initialization of object
+		// fees.Rahul = 100;
+		fees["Rahul"] = 100;
+		fees["Super man"] = 400;
+		fees["total"] = function(){ return (100 + 200); };
+		document.write(fees.Rahul + "<br>");
+		document.write(fees["Rahul"] + "<br>");
+		document.write(fees["Super man"] + "<br>");
+		document.write(fees["total"]() + "<br>");*/
+
+		// Declaration and Initialization of object
+		/*var fees = {"Rahul":100, "Super man": 200, "total": function(){
+			return (100+200);
+		}};
+		document.write(fees["Rahul"] + "<br>");
+		document.write(fees["total"]() + "<br>");*/
+
+		// OBJECT CONSTRUCTOR
+		/*var fees = new Object();
+		fees["Rahul"] = 100;
+		fees["total"] = function(){ return (100 + 200); };
+		document.write(fees["Rahul"] + "<br>");
+		document.write(fees["total"]() + "<br>");*/
+
+		// DELETING PROPERTIES
+		/*var fees = {"Rahul":100, "Sumit":200};
+		console.log(fees);
+		delete fees["Rahul"];
+		console.log(fees);*/
+
+		// FACTORY FUNCTION
+		/*function mobile(modelNo){
+			return {
+				"model": modelNo,
+				"price": function(){
+					return "Price Rs.3000";
+				}
+			};
+		}
+		var samsung = mobile('galaxy');
+		var nokia = mobile('3310');
+		document.write(samsung["model"] + " " + samsung.price() + "<br>");
+		document.write(nokia["model"] + " " + nokia.price() + "<br>");*/
+
+		// CONSTRUCTOR
+		/*function mobile(modelNo){
+			this["model"] = modelNo;
+			this["price"] = function(){
+				document.write(this["model"] + " Price Rs.3000 <br>");
+			};
+		}
+		var samsung = new mobile('galaxy');
+		var nokia = new mobile('3310');
+		samsung.price();
+		nokia.price();*/
+
+		// CHECK PROPERTIES EXISTS
+		/*function mobile(modelNo){
+			this["model"] = modelNo;
+			this["memory"] = 4;
+		}
+		var samsung = new mobile('Galaxy');
+		var nokia = new mobile('3310');
+		if(typeof nokia["memory"] !== "undefined"){
+			document.write("Available");
+		}
+		else{
+			document.write("Doesn't Exist");
+		}
+		if("memory" in nokia){
+			document.write("Available");
+		}
+		else{
+			document.write("Doesn't Exist");
+		}
+		if(nokia.hasOwnProperty("memory")){
+			document.write("Available");
+		}
+		else{
+			document.write("Doesn't Exist");
+		}*/
+
+		// FOR IN LOOP
+		/*function mobile(modelNo){
+			this["model"] = modelNo;
+			this["color"] = "white";
+			this["ram"] = "4GB";
+			this["price"] = function(){
+				document.write(this["model"] + " Price Rs.3000 <br>");
+				return this["model"] + " Price Rs.3000 <br>";
+			}
+		}
+		var samsung = new mobile("Galaxy");
+		var nokia = new mobile("3310");
+		for(var specificationOfMobile in nokia){
+			if(typeof nokia[specificationOfMobile] !== "function"){
+				document.write(specificationOfMobile + " - " + nokia[specificationOfMobile] + "<br>");
+			}
+			else{
+				document.write(specificationOfMobile + " - " + nokia[specificationOfMobile]() + "<br>");
+			}
+		}
+		document.write(Object.keys(nokia));*/
+
+		// WAYS OF CREATING OBJECTS
+		/*// Object literal
+		var fees = {};
+		fees["Rahul"] = 200;
+
+		// Object literal Declare and Initial
+		var fees = { "Rahul": 200 };
+
+		// Object Constructor
+		var fees = new Object();
+
+		// Factory function
+		function mobile(){
+			return {
+				"model":"Galaxy",
+			}
+		}
+		var samsung = mobile();
+		var lg = mobile();
+
+		// Constructor function
+		function mobile() {
+			this["model"] = "Galaxy";
+		}
+		var samsung = new mobile();
+		var lg = new mobile();
+			// OR
+		var mobile = function() {
+			this["model"] = "Galaxy";
+		}
+		var samsung = new mobile();
+		var lg = new mobile();*/
+
+		// CONSTRUCTOR AS A CLASS - PRIVATE PROPERTIES AND METHODS - ACCESS PRIVATE PROPERTY FROM OUTSIDE
+		/*var mobile = function(modelNo, sellingPrice){
+			this.model = modelNo; // public property
+			this.color = "White"; // public property
+			this.price = 3000; // public property
+			this.sellingPrice = sellingPrice; // public property
+			this.sellingPriceFun = function(){ // public function
+				return (this.price + this.sellingPrice);
+			};
+			this.data = function(){ // public function
+				document.write("Model No: " + this.model + " Price: " + this.sellingPriceFun() + "<br>");
+			}
+			var price1 = 1100; // private property
+			let price2 = 2200; // private property
+			const price3 = 3300; // private property
+			var show = function(){ // private property
+				return "Hello World";
+			};
+			this.getPrice1 = function(){ return price1; }; // public function
+			this.getPrice2 = function(){ return price2; }; // public function
+			this.getPrice3 = function(){ return price2; }; // public function
+		};
+		var samsung = new mobile("Galaxy", 2000);
+		var nokia = new mobile("3310", 1000);
+		samsung.data();
+		nokia.data();
+		document.write("Price1: " + nokia.getPrice1() + "<br>"); // Read private property
+		document.write("Price2: " + nokia.getPrice2() + "<br>"); // Read private property
+		document.write("Price3: " + nokia.getPrice3() + "<br>"); // Read private property*/
+
+		// PROTOTYPE
+		/*
+		// Js access bottom to top
+		// samsung object -> mobile object -> prototype object -> object
+		var mobile = function(modelNo){
+			this["model"] = modelNo; // Instance member
+			this["price"] = 3000; // Instance member
+		};
+		var samsung = new mobile("Galaxy");
+		var nokia = new mobile("3310");
+		samsung["color"] = "White";
+		nokia["color"] = "White";
+		document.write(samsung["color"] + "<br>"); // samsung object member
+		document.write(nokia["color"] + "<br>"); // nokia object member
+		console.log(samsung);
+		console.log(nokia);
+
+		mobile.prototype["ram"] = 1000; // Prototype member
+		mobile.prototype["show"] = function() { // Prototype member
+			return "Prototype Show Method";
+		};
+		document.write(samsung["ram"] + "<br>");
+		document.write(nokia["ram"] + "<br>");
+		document.write(samsung.show() + "<br>");
+		document.write(nokia.show() + "<br>");
+		console.log(samsung);
+		console.log(nokia);
+		*/
+
+		// HOW TO ITERATE INSTANCE AND PROTOTYPE MEMBER USING FOR IN LOOP
+		/*var mobile = function(modelNo) {
+			this.model = modelNo;
+			this.price = 3000;
+		};
+		var samsung = new mobile('Galaxy');
+		var nokia = new mobile('3310');
+		mobile.prototype.color = "White";
+		document.write(samsung.color + "<br>");
+		console.log(samsung);
+		document.write(Object.keys(samsung) + "<br>"); // model,price
+		document.write(Object.keys(nokia) + "<br>"); // model,price
+		for(var key in samsung){
+			document.write(key + ", "); // model, price, color, 
+		}*/
+
+		// Prototype Object
+		
+
+		// --------------------------------------------------
+	</script>
+	<script type="text/javascript" src="js-script.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		// console.log("Inline inside body tag");
+	</script>
+</body>
+</html>

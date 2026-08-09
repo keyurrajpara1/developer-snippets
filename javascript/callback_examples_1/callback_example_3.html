@@ -1,0 +1,25 @@
+<script type="text/javascript">
+/*
+Higher Order Function
+Function which takes another function as an arguments is called HOF
+
+Callback Function
+Function which get passed as an argument to another function is called CBF
+*/
+const addition = (a,b) => {
+	return a+b;
+}
+const subtraction = (a,b) => {
+	return Math.abs(a-b);
+}
+const multiplication = (a,b) => {
+	return Math.abs(a*b);
+}
+//Master function HOF
+const calculator = (num1, num2, operator) => {
+	return operator(num1,num2);
+}
+console.log(calculator(5,6,addition));
+console.log(calculator(5,6,multiplication));
+console.log(calculator(5,6,subtraction));
+</script>

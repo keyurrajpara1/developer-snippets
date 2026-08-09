@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="firstController">
+		{{ "Name: " + name + ", Message: " + message + ", Result: " + result }}
+	</div>
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+		myApp.controller("firstController", function($scope, myServ){
+			$scope.message = myServ.message();
+			$scope.result = myServ.add(45, 32);
+			$scope.name = myServ.name;
+		});
+		myApp.service("myServ", function(){
+			this.message = function(){
+				return "Hello from myServ Service.";
+			};
+			this.add = function(a, b){
+				return a + b;
+			};
+			this.name = "Keyur Rajpara";
+		});
+	</script>
+</body>
+</html>

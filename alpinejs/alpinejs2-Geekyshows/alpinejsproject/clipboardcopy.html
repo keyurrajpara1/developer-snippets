@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clipboard Copy</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div x-data="clipboardCopy" class="bg-white shadow-lg rounded-lg p-6 w-96">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Clipboard Copy Example</h1>
+
+    <!-- Text/Code to Copy -->
+    <div class="mb-4">
+      <textarea id="text-to-copy" x-ref="textToCopy"
+        class="w-full h-32 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200">This is the text that will be copied to the clipboard when you click the button.</textarea>
+    </div>
+
+    <!-- Copy Button -->
+    <button @click="copyText"
+      class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">
+      Copy to Clipboard
+    </button>
+
+    <!-- Feedback Message -->
+    <p x-show="copied" class="mt-2 text-green-500 text-sm">Copied to clipboard!</p>
+  </div>
+
+  <script>
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('clipboardCopy', () => ({
+        copied: false,
+        copyText() {
+          const text = this.$refs.textToCopy;
+          text.select();
+          document.execCommand('copy')
+          this.copied = true;
+          setTimeout(() => {
+            this.copied = false
+          }, 2000)
+        }
+      }))
+    })
+
+  </script>
+
+</body>
+
+</html>

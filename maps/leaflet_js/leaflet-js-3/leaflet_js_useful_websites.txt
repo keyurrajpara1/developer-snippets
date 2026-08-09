@@ -1,0 +1,54 @@
+
+https://www.youtube.com/playlist?list=PLm76kc4VPkn27kRYq-58COO5r5bQdrKyy
+
+- https://mapster.me/
+- https://mapstertech.github.io/mapster-right-hand-rule-fixer/
+- https://developer.twitter.com/en/docs/twitter-api/v1/geo/place-information/api-reference/get-geo-id-place_id
+
+- boundaries of geojson of 50 states of america
+https://eric.clst.org/tech/usgeojson/
+shape files: https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html
+https://mygeodata.cloud/converter/
+or
+https://mapshaper.org/
+or
+https://geojson.io/
+US States GeoJSON: https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_500k.json
+
+
+- https://mapster.me/
+- https://geojsonlint.com/
+https://mapster.me/right-hand-rule-geojson-fixer/
+
+
+- https://leafletjs.com/plugins.html#basemap-providers
+- https://github.com/leaflet-extras/leaflet-providers
+- https://leaflet-extras.github.io/leaflet-providers/preview/
+
+- For geojson data, remove line breaks online:
+https://removelinebreaks.net/
+
+- https://turfjs.org/docs/#distance
+
+- https://native-land.ca/
+
+- http://divvy.datasco.pe/
+
+- http://london.webatvantage.be/en/home
+
+- shapes of countries geographic file
+https://thematicmapping.org/downloads/world_borders.php (World Borders Dataset)
+
+- shapes of countries geojson file
+https://github.com/johan/world.geo.json
+
+- earthquake data worldwide
+- earthquake data worldwide api
+https://earthquake.usgs.gov/fdsnws/event/1/
+https://earthquake.usgs.gov/fdsnws/event/1/application.json
+https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+
+- twitter api geo data
+
+
+

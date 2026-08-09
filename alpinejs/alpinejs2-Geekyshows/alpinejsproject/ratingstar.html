@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Rating System</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div x-data="starRating" class="bg-white shadow-lg rounded-lg p-6 w-full max-w-sm">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Rate This Product</h1>
+
+    <!-- Star Rating -->
+    <div class="flex items-center justify-center gap-2 mb-4">
+      <template x-for="star in 5" :key="star">
+        <svg @click=rate(star) @mouseover="hover(star)" @mouseleave="resetHover()" xmlns="http://www.w3.org/2000/svg"
+          :class="star <= (hoveredRating || rating) ? 'text-yellow-400' : 'text-gray-300'"
+          class="w-10 h-10 cursor-pointer" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.98a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.397 2.473a1 1 0 00-.364 1.118l1.287 3.98c.3.921-.755 1.688-1.54 1.118L10 14.347l-3.397 2.473c-.785.57-1.84-.197-1.54-1.118l1.287-3.98a1 1 0 00-.364-1.118L2.589 9.407c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.98z" />
+        </svg>
+      </template>
+
+    </div>
+
+    <!-- Display Rating -->
+    <p class="text-center text-lg text-gray-600">
+      You rated: <span x-text="rating || 'No rating yet'" class="font-semibold text-gray-800"></span>
+    </p>
+  </div>
+
+  <script>
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('starRating', () => ({
+        rating: 0,
+        hoveredRating: 0,
+        rate(star) {
+          this.rating = star;
+        },
+        hover(star) {
+          this.hoveredRating = star;
+        },
+        resetHover(star) {
+          this.hoveredRating = 0;
+        },
+
+      }));
+    });
+
+  </script>
+
+</body>
+
+</html>

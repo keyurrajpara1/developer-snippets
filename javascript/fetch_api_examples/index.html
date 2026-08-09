@@ -1,0 +1,12 @@
+<p id="pId"></p>
+<script type="text/javascript">
+let apiUrl = "https://jsonplaceholder.typicode.com/posts";
+fetch(apiUrl).then((response)=>{
+	return response.json();
+}).then((responseData)=>{
+	console.log(responseData);
+	document.getElementById("pId").innerHTML = responseData;
+}).catch((error)=>{
+	console.log(error);
+});
+</script>

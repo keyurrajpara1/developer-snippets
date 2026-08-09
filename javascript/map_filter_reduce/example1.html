@@ -1,0 +1,77 @@
+<script type="text/javascript">
+	// const array = [1, 2, 3, 4, 5, 6];
+	
+	/*const output = array.map((currentValue, index, arr)=>{
+		return currentValue.toString(2);
+	});*/
+	
+	/*const output = array.filter((currentValue, index, arr)=>{
+		return currentValue%2===0;
+	});*/
+	
+	// console.log(output);
+
+	/*function findSum(array){
+		let sum = 0;
+		for(let i=0; i<array.length; i++){
+			sum = sum + array[i];
+		}
+		return sum;
+	}*/
+
+	// console.log(findSum(array));
+
+	/*const output = array.reduce((total, currentValue, currentIndex, arr)=>{
+		return total = total + currentValue;
+	}, 0);*/
+
+	// console.log(output);
+
+	/*const output = array.reduce((total, currentValue, currentIndex, arr)=>{
+		if(currentValue > total){
+			total = currentValue;
+		}
+		return total;
+	}, 0);*/
+
+	// console.log(output);
+
+	/*const users = [
+		{ firstName: 'Liam', lastName: 'Smith', age: 25 },
+		{ firstName: 'Olivia', lastName: 'Johnson', age: 27 },
+		{ firstName: 'Noah', lastName: 'Williams', age: 30 },
+		{ firstName: 'Emma', lastName: 'Brown', age: 32 },
+		{ firstName: 'Oliver', lastName: 'Jones', age: 25 }
+	]*/
+	/*const output = users.map((currentValue, index, arr)=>{
+		return `${currentValue.firstName} ${currentValue.lastName}`;
+	});
+	console.log(output);*/
+
+	// total = { 25:2, 27:1, 30:1, 32:1 }
+	/*const output = users.reduce((total, currentValue, currentIndex, arr)=>{
+		if(total[currentValue.age]){
+			total[currentValue.age] = ++total[currentValue.age];
+		}
+		else{
+			total[currentValue.age] = 1;
+		}
+		return total;
+	}, {});
+	console.log(output);*/
+
+	/*const output = users.filter((currentValue, index, arr)=>{
+		return currentValue.age==25;
+	}).map((currentValue, index, arr)=>{
+		return `${currentValue.firstName}`;
+	});
+	console.log(output);*/
+
+	/*const output = users.reduce((total, currentValue, currentIndex, arr)=>{
+		if(currentValue.age==25){
+			total.push(currentValue.firstName);
+		}
+		return total;
+	},[]);
+	console.log(output);*/
+</script>

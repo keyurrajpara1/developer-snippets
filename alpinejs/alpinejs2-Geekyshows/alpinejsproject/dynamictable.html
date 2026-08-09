@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Table with Sorting/Filtering</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div x-data="dynamicTable" class="bg-white shadow-lg rounded-lg p-6 w-96">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Dynamic Table with Sorting and Filtering</h1>
+
+    <!-- Search Filter -->
+    <div class="mb-4">
+      <input type="text" x-model="searchQuery"
+        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+        placeholder="Search...">
+    </div>
+
+    <!-- Table -->
+    <table class="w-full table-auto border-collapse">
+      <thead>
+        <tr>
+          <th @click="sortTable('name')" class="cursor-pointer px-4 py-2 border-b text-left">
+            Name
+            <span x-show="sortBy === 'name' && sortOrder === 'asc'" class="ml-1">🔼</span>
+            <span x-show="sortBy === 'name' && sortOrder === 'desc'" class="ml-1">🔽</span>
+          </th>
+          <th @click="sortTable('age')" class="cursor-pointer px-4 py-2 border-b text-left">
+            Age
+            <span x-show="sortBy === 'age' && sortOrder === 'asc'" class="ml-1">🔼</span>
+            <span x-show="sortBy === 'age' && sortOrder === 'desc'" class="ml-1">🔽</span>
+          </th>
+          <th @click="sortTable('city')" class="cursor-pointer px-4 py-2 border-b text-left">
+            City
+            <span x-show="sortBy === 'city' && sortOrder === 'asc'" class="ml-1">🔼</span>
+            <span x-show="sortBy === 'city' && sortOrder === 'desc'" class="ml-1">🔽</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="person in filterData()" :key="person.id">
+          <tr>
+            <td class="px-4 py-2 border-b" x-text="person.name"></td>
+            <td class="px-4 py-2 border-b" x-text="person.age"></td>
+            <td class="px-4 py-2 border-b" x-text="person.city"></td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('dynamicTable', () => ({
+        searchQuery: '',
+        sortBy: 'name',
+        sortOrder: 'asc',
+        people: [
+          { id: 1, name: 'Sonam', age: 30, city: 'Ranchi' },
+          { id: 2, name: 'Rahul', age: 25, city: 'Ranchi' },
+          { id: 3, name: 'Raj', age: 35, city: 'Bokaro' },
+          { id: 4, name: 'Ali', age: 28, city: 'Dumka' },
+          { id: 5, name: 'Yakub', age: 22, city: 'Bokaro' }
+        ],
+        filterData() {
+          return this.people
+            .filter(person => person.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || person.city.toLowerCase().includes(this.searchQuery.toLowerCase()))
+            .sort((a, b) => {
+              console.log("A: ", a);
+              console.log("B: ", b);
+              let compareA = a[this.sortBy]
+              let compareB = b[this.sortBy]
+              console.log("Compare A", compareA);
+              console.log("Compare B", compareB);
+              if (typeof compareA === 'string') {
+                compareA = compareA.toLowerCase();
+                compareB = compareB.toLowerCase();
+              }
+              if (this.sortOrder === 'asc') {
+                return compareA > compareB ? 1 : compareA < compareB ? -1 : 0
+              } else {
+                return compareA < compareB ? 1 : compareA > compareB ? -1 : 0;
+              }
+            })
+        },
+        sortTable(column) {
+          if (this.sortBy === column) {
+            this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+          } else {
+            this.sortBy = column;
+            this.sortOrder = 'asc';
+          }
+        }
+
+      }));
+    });
+  </script>
+
+</body>
+
+</html>

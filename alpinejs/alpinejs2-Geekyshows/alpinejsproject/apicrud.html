@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD API GeekyShows</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+  <div x-data="crudapi" class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">CRUD API</h1>
+      <button @click="openCreateModal()"
+        class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition">
+        Create New Post
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div x-show="loading" class="flex justify-center items-center py-8">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+    </div>
+
+    <!-- Error Message -->
+    <div x-show="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+      <span>Error</span>
+    </div>
+
+    <!-- Posts List -->
+    <div x-show="!loading" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <template x-for="post in posts" :key="post.id">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 x-text="post.title" class="text-xl font-semibold mb-2 text-gray-800"></h2>
+          <p x-text="post.body" class="text-gray-600 mb-4"></p>
+          <div class="flex justify-end space-x-2">
+            <button @click="openEditModal(post)"
+              class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md transition">
+              Edit
+            </button>
+            <button @click="await deletePost(post.id)"
+              class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md transition">
+              Delete
+            </button>
+          </div>
+        </div>
+      </template>
+
+    </div>
+
+    <!-- Create/Edit Modal -->
+    <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-lg p-6 w-full max-w-md" @click.away="showModal = false">
+        <h2 class="text-2xl font-bold mb-4" x-text="editingPost ? 'Edit Post' : 'Create New Post'"></h2>
+        <form @submit.prevent="editingPost ? await updatePost() : await createPost()">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Title</label>
+            <input x-model="formData.title" type="text"
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Body</label>
+            <textarea x-model="formData.body"
+              class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" rows="4"
+              required></textarea>
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button @click="showModal = false" type="button"
+              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition">
+              Cancel
+            </button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('crudapi', () => ({
+        posts: [],
+        loading: true,
+        error: null,
+        showModal: false,
+        editingPost: null,
+        formData: {
+          title: '',
+          body: ''
+        },
+        openCreateModal() {
+          this.editingPost = null;
+          this.formData = { title: '', body: '' }
+          this.showModal = true
+        },
+        openEditModal(post) {
+          this.editingPost = post;
+          this.formData = { title: post.title, body: post.body }
+          this.showModal = true
+        },
+        async init() {
+          await this.fetchPosts();
+        },
+        async fetchPosts() {
+          try {
+            this.loading = true
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+            if (!response.ok) throw new Error('Failed to Fetch Posts');
+            this.posts = await response.json()
+            this.error = null;
+
+          } catch (err) {
+            this.error = 'Failed to load posts. Please try again later.';
+            console.error('Error: ', err);
+          } finally {
+            this.loading = false
+          }
+        },
+
+        async createPost() {
+          try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                title: this.formData.title,
+                body: this.formData.body,
+                userId: 1
+              })
+            })
+            if (!response.ok) throw new Error('Failed to Create New Post');
+            const newPost = await response.json();
+            this.showModal = false;
+            this.error = null;
+            console.log("New Post:", newPost);
+            this.posts.unshift({ ...newPost })
+          } catch (err) {
+            this.error = 'Failed to Create New Post. Please try again';
+            console.error('Error', err)
+          }
+        },
+
+        async updatePost() {
+          try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${this.editingPost.id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                id: this.editingPost.id,
+                title: this.formData.title,
+                body: this.formData.body,
+                userId: 1
+              })
+            })
+            if (!response.ok) throw new Error('Failed to update Post');
+            const updatedPost = await response.json()
+            const index = this.posts.findIndex(post => post.id === this.editingPost.id);
+            if (index !== -1) {
+              this.posts[index] = { ...this.posts[index], ...updatedPost }
+            }
+            console.log("Updated Post", updatedPost);
+            this.showModal = false;
+            this.error = null;
+            this.editingPost = null;
+          } catch (err) {
+            this.error = 'Failed to update post. Please try again.';
+            console.error('Error:', err);
+          }
+        },
+
+        async deletePost(id) {
+          try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+              method: 'DELETE'
+            })
+            if (!response.ok) throw new Error('Failed to Delete Post');
+            const deletePost = await response.json()
+            this.posts = this.posts.filter(post => post.id != id)
+            this.error = null;
+            console.log("Deleted Post", deletePost);
+          } catch (err) {
+            this.error = 'Failed to delete post. Please try again.';
+            console.error('Error:', err);
+
+          }
+        }
+
+
+
+
+      }));
+    });
+  </script>
+</body>
+
+</html>

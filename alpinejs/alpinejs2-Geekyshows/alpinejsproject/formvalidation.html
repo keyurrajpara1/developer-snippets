@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div x-data="formValidation" class="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Form Validation</h1>
+
+    <!-- Form -->
+    <form @submit.prevent="validateForm">
+      <!-- Name Field -->
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 font-medium">Name</label>
+        <input type="text" id="name" x-model="fields.name" @input="validateField('name')"
+          class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+        <p x-show="errors.name" x-text="errors.name" class="text-red-500 text-sm mt-1"></p>
+      </div>
+
+      <!-- Email Field -->
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 font-medium">Email</label>
+        <input type="email" id="email" x-model="fields.email" @input="validateField('email')"
+          class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+        <p x-show="errors.email" x-text="errors.email" class="text-red-500 text-sm mt-1"></p>
+      </div>
+
+      <!-- Password Field -->
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 font-medium">Password</label>
+        <input type="password" id="password" x-model="fields.password" @input="validateField('password')"
+          class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+        <p x-show="errors.password" x-text="errors.password" class="text-red-500 text-sm mt-1"></p>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+        class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300"
+        :disabled="!isFormValid">
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('formValidation', () => ({
+        fields: {
+          name: '',
+          email: '',
+          password: ''
+        },
+        errors: {
+          name: '',
+          email: '',
+          password: ''
+        },
+        validateField(field) {
+          switch (field) {
+            case 'name':
+              this.errors.name = this.fields.name.length < 3 ? 'Name must be at least 3 characters long.' : '';
+              break;
+
+            case 'email':
+              const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              this.errors.email = !emailPattern.test(this.fields.email)
+                ? 'Enter a valid email address.'
+                : '';
+              break;
+
+            case 'password':
+              this.errors.password = this.fields.password.length < 6
+                ? 'Password must be at least 6 characters long.'
+                : '';
+              break;
+          }
+        },
+
+        get isFormValid() {
+          return (
+            this.fields.name.length >= 3 &&
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.fields.email) &&
+            this.fields.password.length >= 6
+          );
+        },
+        validateForm() {
+          this.validateField('name');
+          this.validateField('email');
+          this.validateField('password');
+          if (this.isFormValid) {
+            console.log("Name: ", this.fields.name);
+            console.log("Email: ", this.fields.email);
+            console.log("Password: ", this.fields.password);
+            console.log("Form Submitted Successfully");
+          }
+        }
+
+      }));
+    });
+  </script>
+
+</body>
+
+</html>

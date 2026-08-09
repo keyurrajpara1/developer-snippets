@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Query String Demo</title>
+	</head>
+	<body>
+		<h1>Query String Parameter Demo</h1>
+		<div>
+			<h3>Update Parameter</h3>
+			<input id="updateKey" placeholder="key (e.g. name)" />
+			<input id="updateValue" placeholder="value (e.g. John)" />
+			<button onclick="handleUpdate()">Update URL Parameter</button>
+		</div>
+		<div style="margin-top:20px;">
+			<h3>Delete Parameter</h3>
+			<input id="deleteKey" placeholder="key to delete" />
+			<button onclick="handleDelete()">Delete URL Parameter</button>
+		</div>
+		<script>
+			function updateQueryStringParameter(key, newValue) {
+				const params = new URLSearchParams(window.location.search);
+				params.set(key, newValue);
+				const updatedQueryString = params.toString();
+				const newUrl = `${window.location.pathname}?${updatedQueryString}`;
+				window.history.replaceState({
+					path: newUrl
+				}, '', newUrl);
+			}
+
+			function deleteQueryStringParameter(keyToDelete) {
+				const searchParams = new URLSearchParams(window.location.search);
+				searchParams.delete(keyToDelete);
+				const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+				window.history.pushState({
+					path: newUrl
+				}, '', newUrl);
+			}
+
+			function handleUpdate() {
+				const key = document.getElementById('updateKey').value;
+				const value = document.getElementById('updateValue').value;
+				updateQueryStringParameter(key, value);
+			}
+
+			function handleDelete() {
+				const key = document.getElementById('deleteKey').value;
+				deleteQueryStringParameter(key);
+			}
+		</script>
+	</body>
+</html>

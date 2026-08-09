@@ -1,0 +1,25 @@
+<script type="text/javascript">
+const function1 = () => {
+	setTimeout(()=>{
+		let rollNumberArray = [1,2,3,4,5];
+		console.log(rollNumberArray);
+		
+		setTimeout((firstRollNumber)=>{
+			console.log(firstRollNumber);
+			const bioData = {
+				name: 'A', age: '26'
+			};
+			console.log(bioData);
+
+			setTimeout((studentName)=>{
+				console.log(studentName);
+				bioData.gender = `Male`;
+				console.log(bioData.gender);
+			},2000, bioData.name);
+
+		},2000, rollNumberArray[0]);
+
+	},2000);
+}
+function1();
+</script>

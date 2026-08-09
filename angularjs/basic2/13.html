@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="firstController">
+		{{ "URL: " + url }}<br>
+		{{ "Protocol: " + protocol }}<br>
+		{{ "Hostname: " + host }}<br>
+		{{ "Port No.: " + port }}<br>
+		<hr>
+		{{ "Message: " + message }}<br>
+		<button ng-click="test()">Click Here</button>
+	</div>
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+		myApp.controller("firstController", function($scope, $location, $timeout){
+			$scope.url = $location.absUrl();
+			$scope.protocol = $location.protocol();
+			$scope.host = $location.host();
+			$scope.port = $location.port();
+			$scope.test = function(){
+				$timeout(function(){
+					$scope.message = "Hello from timeout service.";
+				}, 2000);
+			};
+		});
+	</script>
+</body>
+</html>

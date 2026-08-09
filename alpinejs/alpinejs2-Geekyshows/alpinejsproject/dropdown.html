@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeekyShows Dropdown</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <style>
+    .dropdown-container {
+      position: relative;
+      width: 250px;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .dropdown-button {
+      width: 100%;
+      padding: 12px 16px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .dropdown-button:hover {
+      border-color: #94a3b8;
+    }
+
+    .dropdown-content {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      width: 100%;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+    }
+
+    .dropdown-content.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .dropdown-item {
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .dropdown-item:hover {
+      background: #f1f5f9;
+    }
+
+    .chevron {
+      transition: transform 0.2s;
+    }
+
+    .chevron.rotate {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div x-data="dropdown" class="dropdown-container">
+    <button @click="toggle()" class="dropdown-button" @click.outside="close()">
+      <span x-text="selected"></span>
+      <svg class="chevron" :class="{ 'rotate': open }" width="20" height="20" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+    <div class="dropdown-content" :class="{'show':open}">
+      <template x-for="option in options" :key="option">
+        <div x-text="option" class="dropdown-item" @click="select(option)"></div>
+      </template>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('dropdown', () => ({
+        open: false,
+        selected: 'Select an option',
+        options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        toggle() {
+          this.open = !this.open;
+        },
+        close() {
+          this.open = false;
+        },
+        select(option) {
+          this.selected = option;
+          this.open = false;
+          console.log('Selected option:', option);
+        }
+      }))
+    })
+  </script>
+
+</body>
+
+</html>

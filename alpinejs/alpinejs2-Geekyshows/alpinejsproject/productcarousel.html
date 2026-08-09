@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeekyShows</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <style>
+    .carousel-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      position: relative;
+    }
+
+    .carousel {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .carousel-items {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card {
+      flex: 0 0 calc(33.33% - 1rem);
+      /* Adjusting for 3 products per row, minus margin */
+      padding: 1rem;
+      margin: 0.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      background: white;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border-radius: 0.25rem;
+    }
+
+    .product-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+      font-size: 1rem;
+      color: #1a73e8;
+      font-weight: 500;
+    }
+
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-button:hover {
+      background: #f3f4f6;
+    }
+
+    .prev-button {
+      left: -20px;
+    }
+
+    .next-button {
+      right: -20px;
+    }
+
+    .button-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="carousel-container" x-data="carousel">
+    <div class="carousel">
+      <button @click="prev()" class="carousel-button prev-button" :class="{ 'button-disabled': currentSlide === 0 }"
+        :disabled="currentSlide === 0">←</button>
+
+      <div class="carousel-items" :style="`transform: translateX(-${currentSlide * (itemWidth + margin)}px)`">
+        <template x-for="product in products" :key="product.id">
+          <div class="product-card">
+            <img :src="product.image" class="product-image" alt="Product Image" />
+            <h3 class="product-title" x-text="product.title"></h3>
+            <p class="product-price" x-text="product.price"></p>
+          </div>
+        </template>
+      </div>
+
+      <button @click="next()" class="carousel-button next-button"
+        :class="{ 'button-disabled': currentSlide >= products.length - slidesToShow }"
+        :disabled="currentSlide >= products.length - slidesToShow">→</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+
+      Alpine.data('carousel', () => ({
+        currentSlide: 0,
+        slidesToShow: 3,
+        itemWidth: 350,  // Width of each product card
+        margin: 16, // Margin between items (rem adjusted to pixels)
+        products: [
+          { id: 1, title: 'Product 1', image: 'images/img1.jpg', price: '$99.99' },
+          { id: 2, title: 'Product 2', image: 'images/img2.jpg', price: '$149.99' },
+          { id: 3, title: 'Product 3', image: 'images/img3.jpg', price: '$199.99' },
+          { id: 4, title: 'Product 4', image: 'images/img4.jpg', price: '$79.99' },
+          { id: 5, title: 'Product 5', image: 'images/img5.jpg', price: '$129.99' },
+          { id: 6, title: 'Product 6', image: 'images/img3.jpg', price: '$89.99' }
+        ],
+        next() {
+          this.currentSlide = (this.currentSlide + 1) % this.products.length;
+        },
+        prev() {
+          this.currentSlide = (this.currentSlide - 1 + this.products.length) % this.products.length;
+        }
+      }));
+    })
+  </script>
+</body>
+
+</html>

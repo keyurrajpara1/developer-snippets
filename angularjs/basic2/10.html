@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="firstController">
+		Name: <input type="text" ng-model="username">
+		<br>
+		{{ "Name: " + username }}<br>
+		{{ "Name: " + username | uppercase }}<br>
+		{{ "Name: " + username | lowercase }}<br>
+		{{ "Price: " + (price | currency) }}<br>
+		{{ "Price: " + (price | currency : "INR") }}<br>
+		{{ "Price: " + (price | currency : "INR" : 4) }}<br>
+		Price: <input type="text" ng-model="price">
+		<br>
+		{{ "Price: " + price }}<br>
+		<hr>
+		<table border="1">
+			<tr>
+				<th>Name</th>
+				<th>City</th>
+			</tr>
+			<tr ng-repeat="data in records">
+				<td>{{ data.name }}</td>
+				<td>{{ data.city }}</td>
+			</tr>
+		</table>
+		<hr>
+		<table border="1">
+			<tr>
+				<th>Name</th>
+				<th>City</th>
+			</tr>
+			<tr ng-repeat="data in records | orderBy : 'city'">
+				<td>{{ data.name }}</td>
+				<td>{{ data.city }}</td>
+			</tr>
+		</table>
+		<hr>
+		Text: <input type="text" ng-model="x"><br>
+		<ul>
+			<li ng-repeat="city in cities">
+				{{ city }}
+			</li>
+		</ul>
+		<ul>
+			<li ng-repeat="city in cities | filter : x">
+				{{ city }}
+			</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+		myApp.controller("firstController", function($scope) {
+			$scope.records = [
+				{"name": "Sandeep", "city": "Ahmedabad"},
+				{"name": "Aman", "city": "Surat"},
+				{"name": "Faisal", "city": "Baroda"},
+				{"name": "Sunil", "city": "Rajkot"},
+			];
+			$scope.cities = [
+				"Ahmedabad", "Surat", "Baroda", "Rajkot"
+			];
+		});
+	</script>
+</body>
+</html>

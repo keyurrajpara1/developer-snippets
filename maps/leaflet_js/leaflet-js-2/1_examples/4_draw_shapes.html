@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Leaflet</title>
+	<link rel="stylesheet" type="text/css" href="leaflet/leaflet.css">
+	<script type="text/javascript" src="leaflet/leaflet.js"></script>
+	<style type="text/css">
+		#mapContainer{
+			width: 100%;
+			height: 700px;
+		}
+	</style>
+</head>
+<body>
+<div id="mapContainer">
+</div>
+<script type="text/javascript">
+var map = L.map('mapContainer', {
+    center: [51.505, -0.09],
+    zoom: 13
+});
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var circle = L.circle([51.508, -0.11], {
+	color: 'red',
+	fillColor: '#f03',
+	fillOpacity: 0.5,
+	radius: 500
+}).addTo(map);
+
+var polygon = L.polygon([
+	[51.509, -0.08],
+	[51.503, -0.06],
+	[51.51, -0.047]
+]).addTo(map);
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dependent Dropdowns</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div x-data="dependentDropdowns" class="bg-white shadow-lg rounded-lg p-6 w-80">
+    <h4 class="text-lg font-bold text-gray-800 mb-4">Select Category & Subcategory</h4>
+
+    <!-- Category Dropdown -->
+    <div class="mb-4">
+      <label for="category" class="block text-gray-700 font-medium">Category</label>
+      <select name="category" id="category" x-model="selectedCategory"
+        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+        @change="updateSubcategories">
+        <option value="" disabled selected>Select a Category</option>
+        <template x-for="category in categories" :key="category.id">
+          <option :value="category.id" x-text="category.name"></option>
+        </template>
+      </select>
+    </div>
+
+    <!-- Subcategory Dropdown -->
+    <div class="mb-4" x-show="selectedCategory">
+      <label for="subcategory" class="block text-gray-700 font-medium">Subcategory</label>
+      <select name="subcategory" id="subcategory" x-model="selectedSubcategory"
+        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+        @change="logSubcategory" :disabled="!subcategories.length">
+        <option value="" disabled selected>Select a Subcategory</option>
+        <template x-for="subcategory in subcategories" :key="subcategory.id">
+          <option :value="subcategory.id" x-text="subcategory.name"></option>
+        </template>
+      </select>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('dependentDropdowns', () => ({
+        selectedCategory: '',
+        selectedSubcategory: '',
+        subcategories: [],
+        categories: [
+          { id: 1, name: 'Fruits' },
+          { id: 2, name: 'Vegetables' },
+          { id: 3, name: 'Electronics' },
+        ],
+        allSubcategories: {
+          1: [
+            { id: 1, name: 'Apple' },
+            { id: 2, name: 'Banana' },
+            { id: 3, name: 'Orange' }
+          ],
+          2: [
+            { id: 4, name: 'Carrot' },
+            { id: 5, name: 'Tomato' },
+            { id: 6, name: 'Lettuce' }
+          ],
+          3: [
+            { id: 7, name: 'Laptop' },
+            { id: 8, name: 'Smartphone' },
+            { id: 9, name: 'Tablet' }
+          ],
+        },
+
+        updateSubcategories() {
+          this.subcategories = this.allSubcategories[this.selectedCategory] || [];
+          const selectedCategoryName = this.categories.find(c => c.id == this.selectedCategory)?.name || 'None';
+          console.log('Selected Category:', selectedCategoryName);
+          this.selectedSubcategory = ''; // Reset subcategory selection
+        },
+
+        logSubcategory() {
+          const selectedSubcategoryName = this.subcategories.find(s => s.id == this.selectedSubcategory)?.name || 'None';
+          console.log('Selected Subcategory:', selectedSubcategoryName);
+        }
+
+
+      }))
+    })
+
+  </script>
+</body>
+
+</html>

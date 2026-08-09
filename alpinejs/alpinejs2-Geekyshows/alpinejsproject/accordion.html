@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeekyShows</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
+  <style>
+    .accordion {
+      max-width: 600px;
+      margin: 2rem auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-item {
+      border: 1px solid #e5e7eb;
+    }
+
+    .accordion-header {
+      padding: 1rem;
+      background-color: #f9fafb;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .accordion-header:hover {
+      background-color: #f3f4f6;
+    }
+
+    .accordion-content {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .accordion-content.open {
+      padding: 1rem;
+      max-height: 200px;
+    }
+
+    .accordion-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-icon.open {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="accordion" x-data="{ activeAccordion: null }">
+
+    <!-- Accordion Item 1 -->
+    <div class="accordion-item">
+      <div class="accordion-header" @click="activeAccordion = activeAccordion === 1 ? null : 1">
+        <span>What is Alpine.js?</span>
+        <svg class="accordion-icon" width="16" height="16" viewBox="0 0 16 16"
+          :class="{ 'open': activeAccordion === 1 }">
+          <path fill="currentColor" d="M8 12L2 6h12z" />
+        </svg>
+      </div>
+      <div class="accordion-content" :class="{ 'open': activeAccordion === 1 }">
+        Alpine.js is a rugged, minimal framework for composing JavaScript behavior in your markup. It's like Tailwind
+        for JavaScript.
+      </div>
+    </div>
+
+    <!-- Accordion Item 2 -->
+    <div class="accordion-item">
+      <div class="accordion-header" @click="activeAccordion = activeAccordion === 2 ? null : 2">
+        <span>How does it work?</span>
+        <svg class="accordion-icon" width="16" height="16" viewBox="0 0 16 16"
+          :class="{ 'open': activeAccordion === 2 }">
+          <path fill="currentColor" d="M8 12L2 6h12z" />
+        </svg>
+      </div>
+      <div class="accordion-content" :class="{ 'open': activeAccordion === 2 }">
+        Alpine.js offers you a declarative way to add JavaScript behavior to your markup. It's similar to Vue.js but
+        more lightweight and requires no build step.
+      </div>
+    </div>
+
+    <!-- Accordion Item 3 -->
+    <div class="accordion-item">
+      <div class="accordion-header" @click="activeAccordion = activeAccordion === 3 ? null : 3">
+        <span>Why use Alpine.js?</span>
+        <svg class="accordion-icon" width="16" height="16" viewBox="0 0 16 16"
+          :class="{ 'open': activeAccordion === 3 }">
+          <path fill="currentColor" d="M8 12L2 6h12z" />
+        </svg>
+      </div>
+      <div class="accordion-content" :class="{ 'open': activeAccordion === 3 }">
+        It's perfect for adding simple interactivity to your site without the complexity of larger frameworks. It's
+        lightweight, has no build step, and is easy to learn.
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

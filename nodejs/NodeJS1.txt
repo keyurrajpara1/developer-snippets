@@ -1,0 +1,45 @@
+node.js:
+[1] Install https://node.js.org/en/download/
+
+[2] cmd -> node -v
+
+[3] Create a new folder named as learn-node-mysql
+
+[4] Create app.js file inside learn-node-mysql
+
+[5] Open Cmd and Go to folder learn-node-mysql And Run command : node app.js
+
+[6] window object is the global object of javascript while running javascript in browser.
+console.log("Hello World");
+window.console.log("Hello World");
+setTimeout(function(){ console.log("Hello World") },1000);
+window.setTimeout(function(){ console.log("Hello World") },1000);
+
+When declare variable using var it also available in window object.
+var myVariable = "I am a simple variable";
+console.log(myVariable);
+console.log(window.myVariable);
+
+[7] Run command : node simpleObject.js
+Like window object in browser javascript, global object is available in node.js
+Every single javascript file inside node.js like app.js, simpleObject.js are known as modules inside node.js.
+app.js and simpleObject.js is a module.
+
+[8] We have main module or entry module. Suppose it is app.js here. So app.js is main module or entry module.
+But other javascript files are normal module.
+
+[9] If we have many normal modules and in all those normal modules we have some properties, functions. So how can we use those in main module.
+
+[10] Each module in node.js has its own context. So it cannot interfere with another module.
+Suppose we have filea.js
+Inside filea.js we have some properties and functions.
+Let suppose we have another file fileb.js inside that we have the same properties and functions.
+While defining into a single file, all the variables with the same name either it may be properties or functions will override inside each other.
+But if we write in different modules then the are not interfere with their functionality.
+
+[11] Node.js includes 3 types of modules:
+a) Core modules [http, os, fs etc]
+b) Local modules [user custom module]
+c) third party modules [cors, mysql etc]
+
+[12] 

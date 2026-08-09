@@ -1,0 +1,58 @@
+<script type="text/javascript">
+/*const funA = () => {
+	console.log(`Welcome funA`);
+}
+const funB = () => {
+	console.log(`Welcome funB`);
+}
+funA();
+funB();*/
+// ----------------------------------------------
+
+/*const funA = () => {
+	setTimeout(function(){
+		console.log(`Welcome funA`);
+	},3000);
+}
+const funB = () => {
+	console.log(`Welcome funB`);
+}
+funA();
+funB();*/
+// ----------------------------------------------
+
+/*const funA = () => {
+	setTimeout(function(){
+		console.log(`Welcome funA`);
+		funB();
+	},3000);
+}
+const funB = () => {
+	console.log(`Welcome funB`);
+}
+funA();*/
+// ----------------------------------------------
+
+/*const funA = () => {
+	setTimeout(function(){
+		console.log(`Welcome funA`);
+		funB();
+	},3000);
+}
+const funB = () => {
+	console.log(`Welcome funB`);
+}
+funA();*/
+// ----------------------------------------------
+
+const firstFunction = (parameter1, parameter2) => {
+	console.log(`${parameter1}`);
+	console.log(`This is a first function.`);
+	parameter2();
+}
+const secondFunction = () => {
+	console.log(`This is a second function.`);
+}
+firstFunction("First Argument", secondFunction);
+// ----------------------------------------------
+</script>

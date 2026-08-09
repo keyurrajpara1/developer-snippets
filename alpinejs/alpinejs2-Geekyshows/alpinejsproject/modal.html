@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeekyShows</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
+  <style>
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      max-width: 500px;
+      width: 90%;
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .modal-content {
+      margin-bottom: 1rem;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+
+    .primary-button {
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+    }
+
+    .secondary-button {
+      background-color: #e5e7eb;
+      border: 1px solid #d1d5db;
+    }
+  </style>
+</head>
+
+<body>
+  <div x-data="{ isOpen: false }">
+    <!-- Trigger button -->
+    <button @click="isOpen = true" class="primary-button">Open Modal</button>
+
+    <!-- Modal with x-teleport -->
+    <template x-teleport="body">
+      <div class="modal-overlay" x-show="isOpen" :class="{ 'active': isOpen }" @click.self="isOpen = false"
+        x-transition>
+        <div class="modal">
+          <div class="modal-header">
+            <h2>Modal Title</h2>
+            <button @click="isOpen = false" class="close-button">&times;</button>
+          </div>
+
+          <div class="modal-content">
+            <p>This is the modal content. You can put any HTML content here.</p>
+          </div>
+
+          <div class="modal-footer">
+            <button @click="isOpen = false" class="secondary-button">Cancel</button>
+            <button @click="isOpen = false" class="primary-button">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+</body>
+
+</html>

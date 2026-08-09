@@ -1,0 +1,521 @@
+{
+  "info": {
+    "_postman_id": "f9aa187b-c317-4057-bbd6-393318c48740",
+    "name": "Laravel jwt - tymon",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "4564893"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Liam",
+                  "type": "text",
+                  "uuid": "4f746830-68be-4d34-b7c4-a5e6a2aea3e5"
+                },
+                {
+                  "key": "email",
+                  "value": "liambb@yopmail.com",
+                  "type": "text",
+                  "uuid": "e89898ef-3b5f-43fc-abcc-94589597d8b6"
+                },
+                {
+                  "key": "password",
+                  "value": "Password@123",
+                  "type": "text",
+                  "uuid": "91c793a7-ab41-4263-b3c3-3f70d9ff9c0a"
+                },
+                {
+                  "key": "password_confirmation",
+                  "value": "Password@123",
+                  "type": "text",
+                  "uuid": "21dd2b0e-9b42-40a3-9645-ac41fbe167b1"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "liambb@yopmail.com",
+                  "type": "text",
+                  "uuid": "4f746830-68be-4d34-b7c4-a5e6a2aea3e5"
+                },
+                {
+                  "key": "password",
+                  "value": "Password@123",
+                  "type": "text",
+                  "uuid": "4b52b0a7-7490-45e6-bb11-42ffb0830d0d"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "liam@yopmail.com",
+                  "type": "text",
+                  "uuid": "4f746830-68be-4d34-b7c4-a5e6a2aea3e5"
+                },
+                {
+                  "key": "password",
+                  "value": "123456789",
+                  "type": "text",
+                  "uuid": "4b52b0a7-7490-45e6-bb11-42ffb0830d0d"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/forgot-password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "token",
+                  "value": "cf924a68258a237621139c7f53462c310e249f132fa4e1368993ebf19b2754d3",
+                  "type": "text",
+                  "uuid": "4f746830-68be-4d34-b7c4-a5e6a2aea3e5"
+                },
+                {
+                  "key": "email",
+                  "value": "liam@yopmail.com",
+                  "type": "text",
+                  "uuid": "4b52b0a7-7490-45e6-bb11-42ffb0830d0d"
+                },
+                {
+                  "key": "password",
+                  "value": "Password@123",
+                  "type": "text",
+                  "uuid": "56d43089-ed31-487f-959a-d6ee00bc3b4d"
+                },
+                {
+                  "key": "password_confirmation",
+                  "value": "Password@123",
+                  "type": "text",
+                  "uuid": "3a4ea37b-a51b-473a-bed6-3bf631af9659"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/reset-password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Product 1",
+                  "type": "text",
+                  "uuid": "4f746830-68be-4d34-b7c4-a5e6a2aea3e5"
+                },
+                {
+                  "key": "slug",
+                  "value": "product-1",
+                  "type": "text",
+                  "uuid": "e89898ef-3b5f-43fc-abcc-94589597d8b6"
+                },
+                {
+                  "key": "description",
+                  "value": "product 1 description",
+                  "type": "text",
+                  "uuid": "91c793a7-ab41-4263-b3c3-3f70d9ff9c0a"
+                },
+                {
+                  "key": "price",
+                  "value": "100",
+                  "type": "text",
+                  "uuid": "21dd2b0e-9b42-40a3-9645-ac41fbe167b1"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Product 1",
+                  "type": "text",
+                  "uuid": "4f746830-68be-4d34-b7c4-a5e6a2aea3e5"
+                },
+                {
+                  "key": "slug",
+                  "value": "product-1",
+                  "type": "text",
+                  "uuid": "e89898ef-3b5f-43fc-abcc-94589597d8b6"
+                },
+                {
+                  "key": "description",
+                  "value": "product 1 description",
+                  "type": "text",
+                  "uuid": "91c793a7-ab41-4263-b3c3-3f70d9ff9c0a"
+                },
+                {
+                  "key": "price",
+                  "value": "100",
+                  "type": "text",
+                  "uuid": "21dd2b0e-9b42-40a3-9645-ac41fbe167b1"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/refresh",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Product 1",
+                  "type": "text",
+                  "uuid": "4f746830-68be-4d34-b7c4-a5e6a2aea3e5"
+                },
+                {
+                  "key": "slug",
+                  "value": "product-1",
+                  "type": "text",
+                  "uuid": "e89898ef-3b5f-43fc-abcc-94589597d8b6"
+                },
+                {
+                  "key": "description",
+                  "value": "product 1 description",
+                  "type": "text",
+                  "uuid": "91c793a7-ab41-4263-b3c3-3f70d9ff9c0a"
+                },
+                {
+                  "key": "price",
+                  "value": "100",
+                  "type": "text",
+                  "uuid": "21dd2b0e-9b42-40a3-9645-ac41fbe167b1"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Testtttt",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "test@yopmail.commmmm",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "123456789",
+                  "type": "text",
+                  "uuid": "7117bb5b-b8df-4668-ba23-40bc34432bea"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "base_url",
+      "value": "https://nostrum.pavladev.gr/aegaeumnostrum/public/api/v1",
+      "type": "string",
+      "disabled": true
+    },
+    {
+      "key": "token",
+      "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3JlZnJlc2giLCJpYXQiOjE3NDQwMzUzNDQsImV4cCI6MTc0NDAzODk2OSwibmJmIjoxNzQ0MDM1MzY5LCJqdGkiOiJ3b1d6Q2xFMThneFpDc0Y3Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.6BZYfnHPuCj9zKAB5UDfddkZX4i3Qc_YYDYE1mmsLIM",
+      "type": "string"
+    }
+  ]
+}

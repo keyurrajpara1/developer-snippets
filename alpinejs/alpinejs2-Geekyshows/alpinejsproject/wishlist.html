@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Geeky Shows Product Wishlist</title>
+</head>
+
+<body class="bg-gray-100 p-8">
+  <div x-data="wishlistData">
+    <div class="max-w-6xl mx-auto">
+      <h1 class="text-3xl font-bold mb-8 text-gray-800">Featured Products</h1>
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <template x-for="product in products" :key="product.id">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+            <!-- Product Image -->
+            <img :src="product.image" :alt="product.name" class="w-full h-48 object-cover">
+
+            <!-- Wishlist Button -->
+            <button @click="toggleWishlist(product)"
+              :class="product.inWishlist ? 'text-red-500' : 'text-gray-400 hover:text-red-500'" class=" absolute top-4 right-4 h-10 w-10 bg-white rounded-full shadow-md flex items-center justify-center
+              transition-colors duration-200">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+              </svg>
+            </button>
+
+            <!-- Product Details -->
+            <div class="p-4">
+              <h2 class="text-xl font-semibold text-gray-800 mb-2" x-text="product.name"></h2>
+              <p class="text-gray-600 font-medium" x-text="`Rs. ${product.price}`"></p>
+
+              <!-- Add to Cart Button -->
+              <button
+                class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200">
+                Add to Cart </button>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Wishlist Summary -->
+      <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Wishlist</h2>
+        <template x-if="products.some(p => p.inWishlist)">
+          <ul class="space-y-4">
+            <template x-for="product in products.filter(p => p.inWishlist)" :key="product.id">
+              <li class="flex items-center justify-between">
+                <span class="text-gray-700" x-text="product.name"></span>
+                <span class="font-medium text-gray-900" x-text="`Rs. ${product.price}`"></span>
+              </li>
+            </template>
+          </ul>
+        </template>
+        <template x-if="!products.some(p => p.inWishlist)">
+          <p class="text-gray-500">Your wishlist is empty</p>
+        </template>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('wishlistData', () => ({
+        products: [
+          {
+            id: 1,
+            name: 'Wireless Headphones',
+            price: 99.99,
+            image: 'images/img1.jpg',
+            inWishlist: false
+          },
+          {
+            id: 2,
+            name: 'Smart Watch',
+            price: 199.99,
+            image: 'images/img2.jpg',
+            inWishlist: false
+          },
+          {
+            id: 3,
+            name: 'Bluetooth Speaker',
+            price: 79.99,
+            image: 'images/img3.jpg',
+            inWishlist: false
+          }
+        ],
+
+        toggleWishlist(product) {
+          product.inWishlist = !product.inWishlist;
+        }
+
+      }));
+    });
+
+
+  </script>
+
+</body>
+
+</html>

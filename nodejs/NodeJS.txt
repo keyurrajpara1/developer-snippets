@@ -1,0 +1,32 @@
+NodeJS:
+[1] Install https://nodejs.org/en/download/
+
+[2] cmd -> node -v
+
+[3] cmd -> npm -v
+
+[4] cmd -> node
+Here Run JS codes
+To exit: Two times Ctrl + C
+
+[5] Create a new folder named as node-basic
+
+[6] Go to node-basic folder and run command npm init
+npm init = node package manager initialization
+It creates a package
+
+[7] Run command : type NUL > index.js
+
+[8] Open index.js and Type console.log("Hello World");
+
+[9] Run command : node index
+It prints Hello World in cmd.
+
+[10] In JS window object. And in NodeJS module object.
+Node is all about modules only.
+
+[11] Run command : node core-module
+
+[12] Run command : npm install superheroes
+
+[13] Run command : node external-api

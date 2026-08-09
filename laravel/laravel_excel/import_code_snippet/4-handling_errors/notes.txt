@@ -1,0 +1,20 @@
+
+[1] Unique constraint in the email column
+
+->
+When it try to insert the record into the database
+and if we got error it will skip that row
+and move to the next row to insert
+
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+SkipsOnError - Interface
+It requires onError method
+public function onError(Throwable $error){
+}
+
+->
+It also provides us SkipsErrors trait
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+
+Using this trait we can access the errors in the controller.
+

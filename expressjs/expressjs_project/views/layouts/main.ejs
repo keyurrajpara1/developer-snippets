@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title><%= typeof title !== "undefined" ? title : "Express App" %></title>
+        <%#- viteAssets() %>
+        <!-- <link rel="stylesheet" href="/build/assets/app-CnKP03ry.css"> -->
+        <link rel="stylesheet" href="<%= vite.css %>">
+    </head>
+    <body class="d-flex flex-column min-vh-100">
+        <!-- <main class="flex-shrink-0"> -->
+        <main class="flex-grow-1">
+            <%- include("../partials/navbar") %>
+            <%- body %>
+        </main>
+        <%- include("../partials/footer") %>
+        <!-- <script type="module" src="/build/assets/app-BTA2nYWa.js"></script> -->
+        <script type="module" src="<%= vite.js %>"></script>
+    </body>
+</html>

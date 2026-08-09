@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	// Promise Produce
+	const pObj1 = new Promise((resolve, reject) => {
+		setTimeout(()=>{
+			let rollNoArray = [1,2,3,4,5];
+			resolve(rollNoArray);
+			// reject("Error..");
+		},2000);
+	});
+
+	const getBioData = (rollNo) => {
+		return new Promise((resolve, reject) => {
+			setTimeout((rollNo)=>{
+				let bioData = {
+					name: 'Abc', age: '26'
+				};
+				resolve(`My roll number is ${rollNo}. My name is ${bioData.name} and I am ${bioData.age} years old.`);
+				// reject("Error 1....");
+			}, 2000, rollNo);
+		});
+	};
+
+	async function getData(){
+		const rollNoArray = await pObj1;
+		console.log(rollNoArray);
+
+		const secondMessage = await getBioData(rollNoArray[1]);
+		console.log(secondMessage);
+
+		return secondMessage;
+	}
+	let r = getData().then((successMessage)=>{
+		console.log(successMessage);
+	}).catch((errorMessage)=>{
+		console.log(errorMessage);
+	});
+	console.log(r);
+</script>
+</body>
+</html>

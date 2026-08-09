@@ -1,0 +1,22 @@
+
+The better way is that we should validate the row before it is inserted into the database.
+
+For that in the UsersImport class need to implement WithValidation interface.
+
+Next need to create method rules and need to declare the return type array.
+
+And now we will return array and in this array we will specify the rules similar like we specify the rules in the controller to validate the request.
+
+'*.email' => ['email', 'unique:users,email']
+Here * means it should validate the all rows and this email is the heading name.
+
+In the case if excel file do not have the heading so here we will use the index.
+'*.1' => ['email', 'unique:users,email']
+
+---------------------
+
+When it caught any validation error on any row it stops there and do not insert the next rows and it also rollbacks the previously inserted rows.
+
+So let's say it caught the validation error on the row 10th then it will stop right there and it will not insert next rows and also rollback the previously inserted rows.
+
+Because it is using transactions and it rollbacks every previously records that is inserted when it caught the validation error.

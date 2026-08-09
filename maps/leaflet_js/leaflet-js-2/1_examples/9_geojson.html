@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Leaflet</title>
+	<link rel="stylesheet" type="text/css" href="leaflet/leaflet.css">
+	<script type="text/javascript" src="leaflet/leaflet.js"></script>
+	<style type="text/css">
+		#mapContainer{
+			width: 100%;
+			height: 700px;
+		}
+	</style>
+</head>
+<body>
+<div id="mapContainer">
+</div>
+<script type="text/javascript">
+/*
+    leaflet -> latitude and longitude
+    geojson -> longitude and latitude
+*/
+
+var map = L.map('mapContainer', {
+    center: [42.75621, -105.99404],
+    zoom: 5
+});
+
+
+var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
+    {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }
+).addTo(map);
+
+
+var geoJSON = {
+    type:"Feature",
+    properties: {
+        name: "My Name",
+        popupContent: "This is my popup"
+    },
+    geometry:{
+        type:"Point",
+        coordinates:[-104.99404,39.75621]
+    }
+};
+
+
+var myIcon = L.icon({
+    iconUrl:"images/green_flag.png",
+    iconSize: [51,51],
+    iconAnchor: [5,51]
+});
+
+
+L.geoJSON(geoJSON,{
+    pointToLayer: function(feature,latlng){
+        return L.marker(latlng,{
+            icon: myIcon
+        })
+    }
+}).addTo(map);
+
+
+var states = [{
+    "type": "Feature",
+    "properties": {"party": "Republican"},
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+            [-104.05, 48.99],
+            [-97.22,  48.98],
+            [-96.58,  45.94],
+            [-104.03, 45.94],
+            [-104.05, 48.99]
+        ]]
+    }
+}, {
+    "type": "Feature",
+    "properties": {"party": "Democrat"},
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+            [-109.05, 41.00],
+            [-102.06, 40.99],
+            [-102.03, 36.99],
+            [-109.04, 36.99],
+            [-109.05, 41.00]
+        ]]
+    }
+}];
+
+
+L.geoJSON(states,{
+    style: function(feature){
+        switch(feature.properties.party){
+            case 'Republican': return {color: "#ff0000"};
+            case 'Democrat': return {color: "#0000ff"}
+        }
+    }
+}).addTo(map);
+</script>
+</body>
+</html>

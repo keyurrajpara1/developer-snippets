@@ -1,0 +1,10 @@
+
+[1] laravel new spatie-medialibrary-demo --no-interaction
+
+[2] php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="medialibrary-migrations"
+
+[3] php artisan migrate
+
+[4] php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="medialibrary-config"
+
+[5] 

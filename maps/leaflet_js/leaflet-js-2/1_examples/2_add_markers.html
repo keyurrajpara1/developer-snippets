@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Leaflet</title>
+	<link rel="stylesheet" type="text/css" href="leaflet/leaflet.css">
+	<script type="text/javascript" src="leaflet/leaflet.js"></script>
+	<style type="text/css">
+		#mapContainer{
+			width: 100%;
+			height: 700px;
+		}
+	</style>
+</head>
+<body>
+<div id="mapContainer">
+</div>
+<script type="text/javascript">
+var map = L.map('mapContainer', {
+    center: [51.505, -0.09],
+    zoom: 13
+});
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([51.501, -0.093], {
+	title: 'My Position',
+	draggable: true
+}).addTo(map);
+
+
+var myIcon1 = L.icon({
+	iconUrl: 'images/green_flag.png',
+	iconSize: [51, 51],
+	iconAnchor: [5, 51]
+});
+L.marker([51.53, -0.08], {
+	icon: myIcon1
+}).addTo(map);
+L.marker([51.53, -0.08]).addTo(map);
+
+
+var myIcon2 = L.icon({
+	iconUrl: 'images/red_flag.png',
+	iconSize: [51, 51],
+	iconAnchor: [5, 51]
+});
+L.marker([51.48, -0.11], {
+	icon: myIcon2
+}).addTo(map);
+</script>
+</body>
+</html>

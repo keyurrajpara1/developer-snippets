@@ -1,0 +1,22 @@
+Now let's say you don't want transaction here.
+
+It should store the all the records in the database and it should skip only that row which has the validation error
+so for that in the UsersImport class need to implement new interface SkipsOnFailure
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+
+
+And this interface requires method onFailure and it is going to accept Failure class.
+This ...$failure variable will store the validation error on single row and in this method you can handle the validation error as you want.
+
+SkipsOnFailure - Interface
+It requires onFailure method
+public function onFailure(Failure ...$failure){
+}
+
+
+->
+It also provides us SkipsFailures trait
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+
+Using this trait we can access the errors in the controller.
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="firstController">
+		<ol>
+			<li ng-repeat="data in colors">
+				{{ data }}
+			</li>
+		</ol>
+
+		<ol>
+			<li ng-repeat="data in records">
+				{{ "Name: " + data.name + ", City: " + data.city }}
+			</li>
+		</ol>
+	</div>
+</body>
+<script type="text/javascript">
+	var myApp = angular.module("myApp", []);
+	myApp.controller("firstController", function($scope){
+		$scope.colors = ["red", "orange", "yellow", "blue"];
+		$scope.records = [
+			{ "name": "Sandeep", "city": "Ahmedabad" },
+			{ "name": "Amit", "city": "Surat" },
+			{ "name": "Aman", "city": "Baroda" },
+			{ "name": "Sunil", "city": "Rajkot" },
+		];
+	});
+</script>
+</html>

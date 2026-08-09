@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine.js + Bootstrap</title>
+    <!-- Bootstrap 5.3.x CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+<div class="container py-5">
+    <div x-data="$store.firstStore">
+        <h2 class="mb-4">Alpine.js Demo</h2>
+        <div x-data="counter(30)">
+            <h2 x-text="count"></h2>
+            <button @click="increment()">+</button>
+            <button @click="decrement()">-</button>
+        </div>
+        <hr>
+        <div x-data="passwordToggle()" class="mb-4">
+            <input class="form-control" :type="showPassword ? 'text' : 'password'" placeholder="Password">
+            <button class="btn btn-primary mt-2" @click="passwordToggle()" x-text="showPassword ? 'Hide Password' : 'Show Password'"></button>
+        </div>
+        <div x-data="paragraphToggle()" class="mb-4">
+            <button class="btn btn-warning mb-3" @click="paragraphToggle()" x-text="showParagraph ? 'Hide Paragraph' : 'Show Paragraph'"></button>
+            <div class="alert alert-info" x-show="showParagraph" x-transition>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry...
+            </div>
+        </div>
+        <div class="mb-4">
+            <input class="form-control" type="text" x-model="text" placeholder="Type something">
+            <small class="text-muted">
+                Characters:
+                <span x-text="text.length"></span>
+            </small>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <input class="form-control" type="text" placeholder="First Name" x-model="firstName">
+            </div>
+            <div class="col-md-6">
+                <input class="form-control" type="text" placeholder="Last Name" x-model="lastName">
+            </div>
+        </div>
+        <h5 x-text="firstName + ' ' + lastName"></h5>
+        <hr>
+        <div x-data="liveSearch($store.firstStore.names)">
+            <h3>Live Search</h3>
+            <input class="form-control mb-3" type="search" placeholder="Search..." x-model="search" @input="filterFunction()">
+            <div class="list-group">
+                <template x-for="person in filteredNames" :key="person.id">
+                    <div class="list-group-item">
+                        <strong x-text="person.first_name"></strong>
+                        <span x-text="person.last_name"></span>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <br /><br />
+        <div class="mb-4">
+            <button class="btn btn-primary" @click="$dispatch('user-saved', { message: 'User saved successfully!' })">
+                Save User
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div x-data="{ message: '', show: false }" @user-saved.window="message = $event.detail.message; show = true; setTimeout(() => { show = false; }, 3000);">
+        <div class="alert alert-success" x-show="show" x-transition x-text="message">
+        </div>
+    </div>
+    <hr>
+    <div x-data="counter(5)">
+        <h2 x-text="count"></h2>
+        <button @click="increment()">+</button>
+        <button @click="decrement()">-</button>
+    </div>
+    <hr>
+    <div x-data="counter(10)">
+        <h2 x-text="count"></h2>
+        <button @click="increment()">+</button>
+        <button @click="decrement()">-</button>
+    </div>
+    <hr>
+</div>
+<!-- Bootstrap Bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('counter', (start = 0) => ({
+        count: start,
+        increment() { this.count++; },
+        decrement() { this.count--; }
+    }));
+    Alpine.data('passwordToggle', () => ({
+        showPassword: false,
+        passwordToggle() {
+            this.showPassword = !this.showPassword;
+        }
+    }));
+    Alpine.data('paragraphToggle', () => ({
+        showParagraph: true,
+        paragraphToggle() {
+            this.showParagraph = !this.showParagraph;
+        }
+    }));
+    Alpine.data('liveSearch', (names) => ({
+        names,
+        search: '',
+        filteredNames: [...names],
+        filterFunction() {
+            if (this.search.trim() === '') {
+                this.filteredNames = [...this.names];
+                return;
+            }
+            this.filteredNames = this.names.filter(person =>
+                person.first_name.toLowerCase().includes(this.search.toLowerCase())
+            );
+        }
+    }));
+    Alpine.store('firstStore', {
+        text: '', firstName: '', lastName: '',
+        names: [
+            {id:1, first_name:'Liam', last_name:'Test'},
+            {id:2, first_name:'Noah', last_name:'Test'},
+            {id:3, first_name:'Oliver', last_name:'Test'},
+            {id:4, first_name:'Elijah', last_name:'Test'},
+            {id:5, first_name:'Olivia', last_name:'Test'},
+            {id:6, first_name:'Emma', last_name:'Test'},
+            {id:7, first_name:'Ava', last_name:'Test'},
+            {id:8, first_name:'Charlotte', last_name:'Test'}
+        ],
+    });
+});
+</script>
+</body>
+</html>

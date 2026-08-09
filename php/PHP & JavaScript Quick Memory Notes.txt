@@ -1,0 +1,178 @@
+
+PHP & JavaScript Quick Memory Notes
+
+1. ?: (Ternary Operator)
+   Meaning: IF ELSE in one line.
+
+Example:
+$role = $age >= 18 ? 'Adult' : 'Child';
+
+Read as:
+If condition is true → first value.
+Else → second value.
+
+Memory:
+condition ? true_value : false_value
+
+2. ?? (Null Coalescing Operator)
+   Meaning: Use fallback value if left side is NULL.
+
+Example:
+$name = $user['name'] ?? 'Guest';
+
+Read as:
+Use name if it exists and is not null.
+Otherwise use Guest.
+
+Memory:
+left ?? right
+"If left is null, use right."
+
+3. ?-> (PHP Null Safe Operator)
+   Meaning: Access property/method only if object exists.
+
+Example:
+$user?->profile?->city
+
+Read as:
+If user exists, get profile.
+If profile exists, get city.
+Otherwise return null.
+
+Memory:
+?-> = Safe object access.
+
+4. ?. (JavaScript Optional Chaining)
+   Meaning: Same idea as PHP ?->
+
+Example:
+user?.profile?.city
+
+Read as:
+Get city only if everything exists.
+
+Memory:
+?. = Safe access in JavaScript.
+
+5. === (Strict Equal)
+   Meaning:
+   Value AND type must match.
+
+Example:
+5 === "5"   // false
+5 === 5     // true
+
+Memory:
+=== = Same value + same type.
+
+6. == (Loose Equal)
+   Meaning:
+   PHP/JS may convert types before comparing.
+
+Example:
+5 == "5"    // true
+
+Memory:
+== = Compare value only.
+
+7. !== (Strict Not Equal)
+   Meaning:
+   Value or type is different.
+
+Example:
+5 !== "5"   // true
+
+Memory:
+!== = Not same value/type.
+
+8. && (AND)
+   Meaning:
+   All conditions must be true.
+
+Example:
+if ($age >= 18 && $active)
+
+Memory:
+AND = Everything must pass.
+
+9. || (OR)
+   Meaning:
+   At least one condition must be true.
+
+Example:
+if ($admin || $manager)
+
+Memory:
+OR = One is enough.
+
+10. ! (NOT)
+    Meaning:
+    Reverse true/false.
+
+Example:
+if (!$user)
+
+Memory:
+! = Opposite.
+
+11. ??= (Null Coalescing Assignment)
+    Meaning:
+    Assign only if variable is null.
+
+Example:
+$name ??= 'Guest';
+
+Memory:
+"If null, assign value."
+
+12. .= (String Concatenation Assignment in PHP)
+
+Example:
+$name .= ' Patel';
+
+Same as:
+$name = $name . ' Patel';
+
+Memory:
+.= = Add text to existing string.
+
+13. => (Array Key => Value)
+
+Example:
+[
+'name' => 'Keyur'
+]
+
+Memory:
+Left = Key
+Right = Value
+
+14. -> (Object Access)
+
+Example:
+$user->name
+
+Memory:
+-> = Access object property/method.
+
+15. :: (Scope Resolution)
+
+Example:
+User::find(1);
+
+Memory:
+:: = Access static method/property.
+
+Golden Rule
+
+?  = Ask a condition
+:  = Else part of ternary
+?? = If null, use fallback
+?-> = Safe object access (PHP)
+?. = Safe object access (JavaScript)
+=== = Strict compare
+&& = AND
+|| = OR
+! = NOT
+-> = Object access
+:: = Static access

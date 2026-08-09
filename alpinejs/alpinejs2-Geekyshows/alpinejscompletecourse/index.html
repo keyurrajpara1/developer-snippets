@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geeky Shows AlpineJS</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <style>
+    body {
+      background-color: black;
+      color: rgb(215, 215, 215);
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .bg-yellow {
+      background-color: yellow;
+      color: black;
+    }
+
+    .bg-green {
+      background-color: green;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Welcome to Alpine.js</h1>
+  <!-- x-data -->
+  <div x-data></div>
+  <div x-data="{}"></div>
+  <div x-data="{message: 'Hello Alpine'}"></div>
+  <div x-data="{names: ['sonam', 'raj', 'rahul']}"></div>
+  <div x-data="{age: 31}"></div>
+  <div x-data="{isActive: false }"></div>
+  <div x-data="{open: false, toggle() {this.open = ! this.open} }"></div>
+  <div x-data="{ open: false, toggle() {this.open = ! this.open}, get isOpen() {return this.open} }"></div>
+  <div x-data="{message1:'Hello Alpine'}">
+    <div x-data="{message2: 'Bye Alpine'}">
+    </div>
+  </div>
+
+  <!-- x-text -->
+  <!-- <div x-data="{message: 'Hello Alpine'}">
+    <strong x-text="message"></strong>
+  </div>
+
+  <div x-data="{value: 4}">
+    <strong x-text="value + 2"></strong>
+  </div>
+
+  <div x-data="{ isActive: false }">
+    <strong x-text="isActive"></strong>
+  </div>
+
+  <div x-data="{open: false, toggle() {this.open = ! this.open} }">
+    <button @click="toggle()">Toggle Content</button>
+    <button @click="toggle">Toggle Content</button>
+  </div>
+
+  <div x-data="{message1:'Hello Alpine'}">
+    Message1: <strong x-text="message1"></strong>
+    <div x-data="{message2: 'Bye Alpine'}">
+      Message1: <strong x-text="message1"></strong>
+      Message2: <strong x-text="message2"></strong>
+    </div>
+  </div> -->
+
+  <!-- x-on -->
+  <!-- <div x-data>
+    <button x-on:click="console.log('Button Clicked')">Click Me 1</button>
+    <button @click="console.log('Button Clicked')">Click Me 2</button>
+    <button @click="alert($event.target.getAttribute('message'))" message="Hello Alpine">Click Me 3</button>
+    <button @click="myfun()">My Function 1</button>
+    <button @click="myfun">My Function 2</button>
+    <button @click="handleClick">Event Object</button>
+    <br>
+    <input type="text" @keyup.enter="alert('Enter Key Pressed')">
+    <br>
+    <input type="text" @keyup.shift.enter="alert('Shift+Enter Key Pressed!')">
+
+    <form @submit.prevent="console.log('Form Submitted')" action="/geekyshows">
+      <button>Submit</button>
+    </form>
+  </div>
+
+  <div x-data="{ count: 0 }">
+    <button @click="count++">Increment</button>
+    <p>Count: <strong x-text="count"></strong></p>
+  </div> -->
+
+  <!-- x-show -->
+  <!-- <div x-data="{open: true}" x-cloak>
+    <strong x-show="open">This is my content 1</strong>
+  </div>
+
+  <div x-data="{open: false}" x-cloak>
+    <button @click="open = ! open ">Toggle</button>
+    <p x-show="open">This is my content 2</p>
+  </div>
+
+  <div x-data="{open: false}" x-cloak>
+    <button @click="open = ! open ">Extra Force Toggle</button>
+    <p x-show.important="open">This is my content 3</p>
+  </div>
+
+  <div x-data="{open: false}" x-cloak>
+    <button @click="open = ! open ">Transition</button>
+    <p x-show="open" x-transition>This is my content 4</p>
+  </div> -->
+
+  <!-- x-cloak -->
+  <!-- <div x-data x-cloak>
+    <p>Alpine has initialized!</p>
+    <span>This will not 'blip' onto screen at any point</span>
+  </div> -->
+
+  <!-- x-if -->
+  <!-- <div x-data="{isVisible: false}">
+    <button @click="isVisible = !isVisible">If Toggle</button>
+    <template x-if="isVisible">
+      <p>This text is conditionally rendered.</p>
+    </template>
+  </div> -->
+
+  <!-- x-transition -->
+  <!-- <div x-data="{open: false}" x-cloak>
+    <button @click="open = ! open ">Transition</button>
+    <p x-show="open" x-transition>This is my content 5</p>
+  </div>
+
+  <div x-data="{open: false}" x-cloak>
+    <button @click="open = ! open ">Customized Transition</button>
+    <p x-show="open" x-transition:enter.duration.5000ms x-transition:leave.duration.3000ms>This is my content 6</p>
+  </div>
+
+  <div x-data="{open: false}" x-cloak>
+    <button @click="open = ! open ">Delay Transition</button>
+    <p x-show="open" x-transition.delay.1000ms>This is my content 7</p>
+  </div>
+
+  <div x-data="{open: false}" x-cloak>
+    <button @click="open = ! open ">CSS Class Transition</button>
+    <p x-show="open" x-transition:enter="transition ease-out duration-300">This is my content 8</p>
+  </div> -->
+
+  <!-- x-init -->
+  <!-- <div x-init="console.log('I\'m being initialized!')"></div>
+  <div x-data>
+    <div x-init="console.log('I\'m being initialized!')"></div>
+  </div>
+  <div x-data="{ names: [] }" x-init="names = ['sonam', 'rahul', 'raj']">
+    <span x-text="names[1]"></span>
+  </div>
+  <div x-data="{ init() { console.log('I am called automatically') } }"></div>
+  <div x-data="{ init() { console.log('I am called first') } }" x-init="console.log('I am called second')"></div> -->
+
+  <!-- x-bind -->
+  <!-- <div x-data="{ placeholder: 'write your name' }">
+    Name: <input type="text" x-bind:placeholder=placeholder>
+  </div>
+
+  <div x-data="{ placeholder: 'write your city' }">
+    City: <input type="text" :placeholder=placeholder>
+  </div>
+
+  <div x-data="{open: false}">
+    <button @click="open = !open">Toggle</button>
+    <div :class="open ? '' : 'hidden'">This is my content 9</div>
+  </div>
+
+  <div x-data="{open: false}">
+    <button @click="open = !open">Toggle</button>
+    <div :class="open || 'hidden'">This is my content 10</div>
+    <div :class="open || 'hidden'" class="myclass">This is my content 11</div>
+    <div :class="open && 'hidden'">This is my content 12</div>
+  </div>
+
+  <div x-data>
+    <div :style="{color:'red', display:'flex'}">This is Style</div>
+    <div :style="true && { color: 'yellow' }">Conditional Style</div>
+    <div :style="true && { color: 'orange' }" style="padding: 1rem;">Mix Style</div>
+  </div> -->
+
+  <!-- x-html -->
+  <!-- <div x-data="{ username: '<strong>Sonam</strong>' }">
+    Username: <span x-html="username"></span>
+  </div> -->
+
+  <!-- x-for -->
+  <!-- <ul x-data="{ colors: ['Red', 'Orange', 'Yellow'] }">
+    <template x-for="color in colors">
+      <li x-text="color"></li>
+    </template>
+  </ul>
+
+  <ul x-data="{ colors: ['Red', 'Orange', 'Yellow'] }">
+    <template x-for="(color, index) in colors">
+      <li>
+        <span x-text="index + ': '"></span>
+        <span x-text="color"></span>
+      </li>
+    </template>
+  </ul>
+
+  <ul x-data="{ car: { make: 'Jeep', model: 'Grand Cherokee', color: 'Black' } }">
+    <template x-for="(value, index) in car">
+      <li>
+        <span x-text="index"></span>: <span x-text="value"></span>
+      </li>
+    </template>
+  </ul>
+
+  <ul x-data="{ colors: [
+    { id: 1, label: 'Red' },
+    { id: 2, label: 'Orange' },
+    { id: 3, label: 'Yellow' },
+  ]}">
+    <template x-for="color in colors" :key="color.id">
+      <li>
+        <span x-text="color.id"></span>
+        <span x-text="color.label"></span>
+      </li>
+    </template>
+  </ul>
+
+  <ul x-data>
+    <template x-for="i in 10" :key="i">
+      <li x-text="i"></li>
+    </template>
+  </ul> -->
+
+  <!-- x-effect -->
+  <!-- <div x-data="{ label: 'Hello' }" x-effect="console.log(label)">
+    <button @click="label += ' World!'">Change Message</button>
+  </div> -->
+
+  <!-- x-ignore -->
+  <!-- <div x-data="{ label: 'From Alpine' }">
+    <div x-ignore>
+      <span x-text="label"></span>
+    </div>
+  </div> -->
+
+  <!-- x-ref -->
+  <!-- <div x-data>
+    <button @click="$refs.mytext.remove()">Remove Text</button>
+    <span x-ref="mytext">Click button to Remove me</span>
+  </div> -->
+
+  <!-- x-teleport -->
+  <!-- <div x-data="{open: false}">
+    <button @click="open = ! open">Open Modal</button>
+    <template x-teleport="#modals">
+      <div x-show="open">
+        <div>
+          <p>This is modal</p>
+        </div>
+      </div>
+    </template>
+  </div>
+  <h2>Another element</h2>
+  <div id="modals"></div>
+
+  <div x-data="{ open: false }">
+    <button @click="open = ! open">Toggle Modal</button>
+    <template x-teleport="body">
+      <div x-show="open">
+        Modal contents...
+        <div x-data="{ open: false }">
+          <button @click="open = ! open">Toggle Nested Modal</button>
+          <template x-teleport="body">
+            <div x-show="open">
+              Nested modal contents...
+            </div>
+          </template>
+        </div>
+      </div>
+    </template>
+  </div> -->
+
+  <!-- x-id -->
+  <!-- <div x-data>
+    <div x-id="['myinput']">
+      <label :for="$id('myinput')">Name:</label>
+      <input :id="$id('myinput')" type="text">
+    </div>
+
+    <div x-id="['myinput']">
+      <label :for="$id('myinput')">City:</label>
+      <input :id="$id('myinput')" type="text">
+    </div>
+  </div> -->
+
+  <!-- x-model -->
+  <!-- <div x-data="{ name: '' }">
+    Name: <input x-model="name" type="text" placeholder="Enter your name">
+    <p>Your name: <span x-text="name"></span></p>
+  </div>
+
+  <div x-data="{ name: '' }">
+    Lazy Name: <input x-model.lazy="name" type="text" placeholder="Enter your name">
+    <p>Your name: <span x-text="name"></span></p>
+  </div>
+
+  <div x-data="{ age: '' }">
+    Age: <input x-model.number="age" type="text" placeholder="Enter your age">
+    <p>Type of Your age: <span x-text="typeof age"></span></p>
+  </div>
+
+  <div x-data="{ message: '' }">
+    Message: <textarea x-model="message"></textarea>
+    Your Message: <span x-text="message"></span>
+  </div>
+
+  <div x-data="{ show: '' }">
+    <input type="checkbox" id="checkbox" x-model="show">
+    <label for="checkbox" x-text="show"></label>
+  </div> -->
+
+  <!-- <div x-data="{ colors: [] }">
+    <input type="checkbox" value="red" x-model="colors">
+    <input type="checkbox" value="orange" x-model="colors">
+    <input type="checkbox" value="yellow" x-model="colors">
+    Colors: <span x-text="colors"></span>
+  </div>
+
+  <div x-data="{ answer: '' }">
+    <input type="radio" value="yes" x-model="answer">
+    <input type="radio" value="no" x-model="answer">
+    Answer: <span x-text="answer"></span>
+  </div>
+
+  <div x-data="{ color: '' }">
+    <select x-model="color">
+      <option>Red</option>
+      <option>Orange</option>
+      <option>Yellow</option>
+    </select>
+    Color: <span x-text="color"></span>
+  </div>
+
+  <div x-data="{ color: '' }">
+    <select x-model="color">
+      <template x-for="color in ['Red', 'Orange', 'Yellow']">
+        <option x-text="color"></option>
+      </template>
+    </select>
+    Color: <span x-text="color"></span>
+  </div>
+
+  <div x-data="{ color: '' }">
+    <select x-model="color">
+      <option value="" disabled>Select A Color</option>
+      <option>Red</option>
+      <option>Orange</option>
+      <option>Yellow</option>
+    </select>
+    Color: <span x-text="color"></span>
+  </div>
+
+  <div x-data="{ color: '' }">
+    <select x-model="color" multiple>
+      <option>Red</option>
+      <option>Orange</option>
+      <option>Yellow</option>
+    </select>
+    Colors: <span x-text="color"></span>
+  </div>
+
+  <div x-data="{ range: 0.2 }">
+    <input type="range" x-model="range" min="0" max="1" step="0.1">
+    <span x-text="range"></span>
+  </div>
+
+  <div x-data="{ searchText: '' }">
+    Search: <input x-model.debounce.5000ms="searchText" type="text" placeholder="write search item..">
+    <p>Search Items: <span x-text="searchText"></span></p>
+  </div> 
+
+  <div x-data="{ searchText: '' }">
+    Search: <input x-model.throttle.1000ms="searchText" type="text" placeholder="write search item..">
+    <p>Search Items: <span x-text="searchText"></span></p>
+  </div> -->
+
+  <!-- $el -->
+  <!-- <div x-data>
+    <button @click="$el.innerHTML = 'Hello World!'">Replace me with "Hello World!"</button>
+  </div> -->
+
+  <!-- $refs -->
+  <!-- <div x-data>
+    <button @click="$refs.mytext.remove()">Remove Text</button>
+    <span x-ref="mytext">Hello I will be removed</span>
+  </div> -->
+
+  <!-- $data -->
+  <!-- <div x-data="{ greeting: 'Hello' }">
+    <div x-data="{ name: 'Sonam' }">
+      <button @click="sayHello($data)">Say Hello</button>
+    </div>
+  </div> -->
+
+  <!-- $root -->
+  <!-- <div x-data data-message="Hello Sonam">
+    <button @click="alert($root.dataset.message)">Say Hello 1 </button>
+  </div>
+
+  <div x-data data-message="Hello Sonam">
+    <div x-data>
+      <button @click="alert($root.dataset.message)">Say Hello 2 </button>
+    </div>
+  </div> -->
+
+  <!-- $watch -->
+  <!-- <div x-data="{ count: 0 }" x-init="$watch('count', value => console.log('Count changed to:', value))">
+    <button x-on:click="count++">Increment</button>
+    <p>Count: <span x-text="count"></span></p>
+  </div>
+
+  <div x-data="{ count: 0 }"
+    x-init="$watch('count', (value, oldValue) => { console.log('Old Value:', oldValue); console.log('New Value:', value); } )">
+    <button x-on:click="count++">Increment</button>
+    <p>Count: <span x-text="count"></span></p>
+  </div> -->
+
+  <!-- $dispatch -->
+  <!-- <div x-data>
+    <div @notify="alert('Hello World!')">
+      <button @click="$dispatch('notify')">Notify 1 </button>
+    </div>
+  </div>
+
+  <div x-data>
+    <div @notify="alert($event.detail.message)">
+      <button @click="$dispatch('notify', { message: 'Hello World!' })"> Notify 2</button>
+    </div>
+  </div>
+
+  <div x-data="{ title: 'Sonam' }" @set-title.window="title = $event.detail">
+    <h1 x-text="title"></h1>
+  </div>
+  <div x-data>
+    <button @click="$dispatch('set-title', 'Raj')">Click me</button>
+  </div> -->
+
+  <!-- $store -->
+  <!-- <div x-data>
+    <button @click="$store.counter.count++">Increment</button>
+    Count: <strong x-text="$store.counter.count"></strong>
+  </div>
+
+  <button x-data @click="$store.yellowMode.toggle()">Toggle Yellow Mode</button>
+  <p>Hello No Yellow Mode</p>
+  <div x-data :class="$store.yellowMode.on && 'bg-yellow'">
+    <p>Hello Yellow Mode</p>
+  </div>
+
+  <button x-data @click="$store.greenMode = ! $store.greenMode">Toggle Green Mode</button>
+  <p>Hello No Green Mode</p>
+  <div x-data :class="$store.greenMode && 'bg-green'">
+    <p>Hello Green Mode</p>
+  </div> -->
+
+  <!-- Alpine.data() -->
+  <!-- <div x-data="dropdown">
+    <button @click="toggle">Toggle</button>
+    <div x-show="open">Content</div>
+  </div> -->
+
+  <!-- Alpine.bind() -->
+  <!-- <div x-data>
+    <button x-bind="SomeButton">Button</button>
+  </div> -->
+
+  <!-- Async -->
+  <!-- <div x-data>
+    <p x-text="syncFun()"></p>
+    <p x-text="await asyncFun()"></p>
+    <p x-text="await asyncFun"></p>
+  </div> -->
+
+  <!-- Plugins Mask -->
+  <!-- <div x-data>
+    Date: <input x-mask="99/99/9999" placeholder="MM/DD/YYYY">
+    Price: <input x-mask:dynamic="$money($input)">
+  </div> -->
+
+  <script>
+    function myfun() {
+      console.log("My Function called");
+    }
+    function handleClick(e) {
+      console.log(e);
+    }
+
+    function sayHello({ greeting, name }) {
+      alert(greeting + ' ' + name + '!')
+    }
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.store('counter', {
+        count: 0
+      })
+    })
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.store('yellowMode', {
+        on: false,
+        toggle() {
+          this.on = !this.on
+        }
+      })
+    })
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.store('greenMode', false)
+    })
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('dropdown', () => ({
+        open: false,
+
+        toggle() {
+          this.open = !this.open
+        }
+      }))
+    })
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.bind('SomeButton', () => ({
+        type: 'button',
+        '@click'() {
+          console.log("Button Clicked");
+        },
+
+      }))
+    })
+
+    function syncFun() {
+      return 'Hello Sync!'
+    }
+    async function asyncFun() {
+      return 'Hello Async!'
+    }
+  </script>
+</body>
+
+</html>
