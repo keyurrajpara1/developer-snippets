@@ -1,0 +1,7 @@
+{
+  "APP_BASE_NAME": "Lauren",
+  "roles" : {
+    "ADMIN_ROLE_ID" : 1,
+    "USER_ROLE_ID" : 2
+  }
+}

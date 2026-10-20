@@ -1,6 +1,5 @@
 import { services } from "../../data/siteData";
 import { FeatureIcon } from "../common/FeatureIcon";
-
 export function ServiceCards() {
 	return (
 		<div className="row gx-5 row-cols-1 row-cols-md-3">
